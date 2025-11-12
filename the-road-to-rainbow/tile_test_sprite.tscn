@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://dti27yei47ah5"]
+
+[ext_resource type="Texture2D" uid="uid://c0nn6gyabo8v7" path="res://mobs/tile-test-sprites/test_sprite.png" id="1_udxe7"]
+
+[sub_resource type="GDScript" id="GDScript_udxe7"]
+script/source = "extends CharacterBody2D
+
+@export var speed = 400
+
+func _ready():
+	position = Vector2(577, 300)
+	
+func _process(delta):
+	var velocity1 = Vector2.ZERO # The player's movement vector.
+	if Input.is_action_pressed(\"ui_right\"):
+		velocity1.x += 1
+	if Input.is_action_pressed(\"ui_left\"):
+		velocity1.x -= 1
+	if Input.is_action_pressed(\"ui_down\"):
+		velocity1.y += 1
+	if Input.is_action_pressed(\"ui_up\"):
+		velocity1.y -= 1
+
+	if velocity1.length() > 0:
+		velocity1 = velocity1.normalized() * speed
+	
+	position += velocity1 * delta
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8u7"]
+size = Vector2(25.75, 30)
+
+[node name="testSprite" type="CharacterBody2D"]
+scale = Vector2(4, 4)
+script = SubResource("GDScript_udxe7")
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_udxe7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.625, 1)
+shape = SubResource("RectangleShape2D_ob8u7")

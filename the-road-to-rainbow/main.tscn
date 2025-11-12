@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://jw7mg0bdtxoi"]
+[gd_scene load_steps=3 format=3 uid="uid://jw7mg0bdtxoi"]
+
+[ext_resource type="PackedScene" uid="uid://dti27yei47ah5" path="res://tile_test_sprite.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://og8afxf2gjr" path="res://tilemaps.tscn" id="2_h2yge"]
 
 [node name="Main" type="Node2D"]
+
+[node name="allTiles" parent="." instance=ExtResource("2_h2yge")]
+visible = false
+
+[node name="testSprite" parent="." instance=ExtResource("1_0xm2m")]
+z_index = 1
+position = Vector2(577, 199)
