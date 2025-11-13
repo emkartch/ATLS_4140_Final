@@ -25,6 +25,8 @@ func _process(delta):
 		velocity1 = velocity1.normalized() * speed
 	
 	position += velocity1 * delta
+
+	move_and_slide()
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8u7"]
