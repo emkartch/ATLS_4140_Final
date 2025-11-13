@@ -6,7 +6,6 @@
 [node name="Main" type="Node2D"]
 
 [node name="allTiles" parent="." instance=ExtResource("2_h2yge")]
-visible = false
 
 [node name="testSprite" parent="." instance=ExtResource("1_0xm2m")]
 z_index = 1
