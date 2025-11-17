@@ -12,3 +12,5 @@ script = ExtResource("1_h2yge")
 [node name="testSprite" parent="." instance=ExtResource("1_0xm2m")]
 z_index = 1
 position = Vector2(577, 199)
+
+[connection signal="activate_puzzle" from="allTiles" to="." method="activate_puzzle"]

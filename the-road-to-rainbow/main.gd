@@ -7,3 +7,7 @@ func _unhandled_input(event):
 		if event is InputEventMouseButton:
 			if event.pressed == false and event.button_index == 1:
 				$allTiles.check_for_puzzle_click($testSprite.position)
+				
+# This function is what will activate the puzzle minigames
+func activate_puzzle(tile_coords, tileset_coords):
+	print("Activated puzzle!", tile_coords, tileset_coords)
