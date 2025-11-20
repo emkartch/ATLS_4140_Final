@@ -4,7 +4,8 @@ signal activate_puzzle(tile_coords, tileset_coords)
 var puzzle_coords = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
 
 func _ready():
-	pass;
+	var redTexture = load("res://tilesets/RedTiles2.png")
+	$redGround.tile_set.get_source(0).texture = redTexture
 
 # Checks if mouse clicked on a puzzle tile
 func check_for_puzzle_click(sprite_pos):
