@@ -1,11 +1,26 @@
 extends TileMapLayer
 signal activate_puzzle(tile_coords, tileset_coords)
 
+# for tracking where we are at
+var lvl = 1
+var color = "red"
+var lvl_finished = false
+var num_finished = 0
+
 var puzzle_coords = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
 
 func _ready():
-	var redTexture = load("res://tilesets/RedTiles2.png")
-	$redGround.tile_set.get_source(0).texture = redTexture
+	change_tile_set()
+
+func change_tile_set():
+	if lvl == 1 and lvl_finished == false:
+		var newTexture = load("res://tilesets/RedTilesGrey.png")
+		$redGround.tile_set.get_source(0).texture = newTexture
+		$redAccPuzz.tile_set.get_source(1).texture = newTexture
+	elif lvl == 1 and lvl_finished == true:
+		var newTexture = load("res://tilesets/OnlyRed-Lvl1.png")
+		$redGround.tile_set.get_source(0).texture = newTexture
+		$redAccPuzz.tile_set.get_source(1).texture = newTexture
 
 # Checks if mouse clicked on a puzzle tile
 func check_for_puzzle_click(sprite_pos):
@@ -24,18 +39,22 @@ func check_for_puzzle_click(sprite_pos):
 		
 		# How far away is the player from the clicked tile?
 		var pos_delta = tile_map_coords - sprite_pos
-		print("Delta:", pos_delta)
+		#print("Delta:", pos_delta)
 		
 		# Is the player near enough to the tile?
 		var is_near_enough = false
 		if abs(pos_delta[0]) <= 140 and abs(pos_delta[1]) <= 100:
 			is_near_enough = true
 			
-		print(tileset_coords)
+		#print(tileset_coords)
 		if tileset_coords in puzzle_coords and is_near_enough:
 			#print("activate puzzle")
 			activate_puzzle.emit(tile_map_coords, tileset_coords)
-			
+			num_finished += 1
+	
+	if num_finished >= 5:
+		lvl_finished = true
+		change_tile_set()
 
 # Looks for mouse clicks (releases, not presses)
 #func _unhandled_input(event):
