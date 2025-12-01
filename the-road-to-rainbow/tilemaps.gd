@@ -8,26 +8,30 @@ var lvl_finished = false
 var num_finished = 0
 
 var lvl_tiles = []
+var lvl_walls = []
+var lvl_puzz = []
 var puzzle_coords = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
 
 func _ready():
 	lvl_tiles = [$Red, $Orange]
+	lvl_walls = [$Red/Walls, $Orange/Walls]
+	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz]
 	
-	lvl = 1
+	lvl = 2
 	change_tile_set()
 
 # Setting show and collisions per tile
 func set_collisions():
 	for i in range(0,2):
-		print(lvl_tiles[i])
-		print(i)
 		
 		if lvl - 1 == i:
 			lvl_tiles[i].show()
-			lvl_tiles[i].collision_enabled = true
+			lvl_walls[i].collision_enabled = true
+			lvl_puzz[i].collision_enabled = true
 		else:
 			lvl_tiles[i].hide()
-			lvl_tiles[i].collision_enabled = false
+			lvl_walls[i].collision_enabled = false
+			lvl_puzz[i].collision_enabled = false
 
 func change_tile_set():
 	if lvl == 1 and lvl_finished == false:
@@ -39,7 +43,10 @@ func change_tile_set():
 		$Red/Ground.tile_set.get_source(0).texture = newTexture
 		$Red/AccPuzz.tile_set.get_source(1).texture = newTexture
 	elif lvl == 2 and lvl_finished == false:
-		var newTexture = load("res://tilesets/OrangeTiles.png")
+		var newTexture = load("res://tilesets/Greyed-Orange.png")
+		$Orange/Ground.tile_set.get_source(0).texture = newTexture
+	elif lvl == 2 and lvl_finished == true:
+		var newTexture = load("res://tilesets/Only-Orange.png")
 		$Orange/Ground.tile_set.get_source(0).texture = newTexture
 		
 	# setting show and collisions
@@ -51,11 +58,11 @@ func check_for_puzzle_click(sprite_pos):
 	# Where is the mouse in global coords?
 	var mouse_pos = get_global_mouse_position()
 	# Where is the tile on the tilemap layer?
-	var tile_pos = $Red/AccPuzz.local_to_map(mouse_pos)
+	var tile_pos = lvl_puzz[lvl - 1].local_to_map(mouse_pos)
 	# Where is the tile in global coords?
-	var tile_map_coords = $Red/AccPuzz.map_to_local(tile_pos)
+	var tile_map_coords = lvl_puzz[lvl - 1].map_to_local(tile_pos)
 	# Where is the tile in the tileset?
-	var tileset_coords = $Red/AccPuzz.get_cell_atlas_coords(tile_pos)
+	var tileset_coords = lvl_puzz[lvl - 1].get_cell_atlas_coords(tile_pos)
 	print(tileset_coords)
 	
 	if tileset_coords!= Vector2i(-1,-1):
