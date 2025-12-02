@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dti27yei47ah5"]
+[gd_scene load_steps=8 format=3 uid="uid://dti27yei47ah5"]
 
 [ext_resource type="Script" uid="uid://0s41has1f1ju" path="res://player_controller.gd" id="1_o6g0v"]
 [ext_resource type="SpriteFrames" uid="uid://d0dvpp8snbs1g" path="res://player/sprites/red_test.tres" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://ymbng5cu38sy" path="res://states/player_state_machine.gd" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://ccgnjn2k7y5uf" path="res://states/idle.gd" id="4_hqtel"]
 [ext_resource type="Script" uid="uid://bd1025xo7vmov" path="res://states/walk.gd" id="5_sweqy"]
+[ext_resource type="Script" uid="uid://rjf5in3lxlga" path="res://states/run.gd" id="6_2hs0m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8u7"]
 size = Vector2(25.75, 30)
@@ -38,3 +39,8 @@ metadata/_custom_type_script = "uid://ccgnjn2k7y5uf"
 script = ExtResource("5_sweqy")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://bd1025xo7vmov"
+
+[node name="run" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+script = ExtResource("6_2hs0m")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://rjf5in3lxlga"

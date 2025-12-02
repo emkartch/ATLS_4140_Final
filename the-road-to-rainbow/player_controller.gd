@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 400
+#@export var speed = 400
 
 var basic_sprites: SpriteFrames = preload("res://player/sprites/basic_sprites.tres")
 var r_sprites: SpriteFrames = preload("res://player/sprites/red_sprites.tres")
@@ -34,7 +34,7 @@ func _process(delta):
 		Global.cur_direction = "up"
 
 	if velocity1.length() > 0:
-		velocity1 = velocity1.normalized() * speed
+		velocity1 = velocity1.normalized() * Global.player_speed
 		Global.player_move = true
 	else:
 		Global.player_move = false
@@ -42,7 +42,6 @@ func _process(delta):
 	position += velocity1 * delta
 
 	move_and_slide()
-	
 	
 	if Input.is_action_just_pressed("input_test"):
 		if test_tracker == 0:

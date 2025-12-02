@@ -8,13 +8,17 @@ class_name idle
 func enter():
 	animatedSprite.play("idle_" + Global.cur_direction)
 
-func update(delta):
+func update(_delta):
 	if animatedSprite.get_animation() == "idle_" + Global.cur_direction:
 		pass
 	else:
 		animatedSprite.play("idle_" + Global.cur_direction)
 		
-func physics_update(delta):
+func physics_update(_delta):
 	
 	if Global.player_move:
-		Transitioned.emit(self, "walk")
+		if Input.is_action_pressed("player_run"):
+			Transitioned.emit(self, "run")
+		else:
+			Transitioned.emit(self, "walk")
+			

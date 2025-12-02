@@ -1,0 +1,23 @@
+extends State
+class_name run
+
+@export var player : CharacterBody2D
+
+@onready var animatedSprite: AnimatedSprite2D = get_node("/root/Main/Player/AnimatedSprite2D")
+
+func enter():
+	Global.player_speed = 600
+	animatedSprite.play("run_" + Global.cur_direction)
+
+func update(_delta):
+	if animatedSprite.get_animation() == "run_" + Global.cur_direction:
+		pass
+	else:
+		animatedSprite.play("run_" + Global.cur_direction)
+
+func physics_update(_delta):
+	
+	if !Global.player_move:
+		Transitioned.emit(self, "idle")
+	elif Global.player_move and Input.is_action_just_released("player_run"):
+		Transitioned.emit(self, "walk")
