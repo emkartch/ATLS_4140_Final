@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://b0ueeio0r8gvf"]
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://b0ueeio0r8gvf"]
 
 [ext_resource type="Texture2D" uid="uid://bng6opm4lnpyv" path="res://mobs/sprites/Slime_Red.png" id="1_2betn"]
 
@@ -21,6 +21,10 @@ region = Rect2(192, 256, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_b3mxk"]
 atlas = ExtResource("1_2betn")
 region = Rect2(256, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2betn"]
+atlas = ExtResource("1_2betn")
+region = Rect2(320, 256, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1qmh0"]
 atlas = ExtResource("1_2betn")
@@ -67,6 +71,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b3mxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2betn")
 }],
 "loop": true,
 "name": &"death",

@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dti27yei47ah5"]
+[gd_scene load_steps=7 format=3 uid="uid://dti27yei47ah5"]
 
 [ext_resource type="Script" uid="uid://0s41has1f1ju" path="res://player_controller.gd" id="1_o6g0v"]
 [ext_resource type="SpriteFrames" uid="uid://d0dvpp8snbs1g" path="res://player/sprites/red_test.tres" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://ymbng5cu38sy" path="res://states/player_state_machine.gd" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://ccgnjn2k7y5uf" path="res://states/idle.gd" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://bd1025xo7vmov" path="res://states/walk.gd" id="5_sweqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8u7"]
 size = Vector2(25.75, 30)
@@ -12,10 +15,26 @@ script = ExtResource("1_o6g0v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_onrkg")
-animation = &"hurt_right"
+animation = &"idle_left"
+frame = 1
+frame_progress = 0.515499
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.625, 1)
 shape = SubResource("RectangleShape2D_ob8u7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_i3pqv")
+initial_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+script = ExtResource("4_hqtel")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://ccgnjn2k7y5uf"
+
+[node name="walk" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+script = ExtResource("5_sweqy")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://bd1025xo7vmov"

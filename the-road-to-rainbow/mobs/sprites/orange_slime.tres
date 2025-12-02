@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://05pkokbjko36"]
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://05pkokbjko36"]
 
 [ext_resource type="Texture2D" uid="uid://ch3n71n3x6oti" path="res://mobs/sprites/Slime_Orange.png" id="1_g2gm4"]
 
@@ -21,6 +21,10 @@ region = Rect2(192, 256, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mso27"]
 atlas = ExtResource("1_g2gm4")
 region = Rect2(256, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2gm4"]
+atlas = ExtResource("1_g2gm4")
+region = Rect2(320, 256, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f5ew"]
 atlas = ExtResource("1_g2gm4")
@@ -67,6 +71,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mso27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2gm4")
 }],
 "loop": true,
 "name": &"death",
