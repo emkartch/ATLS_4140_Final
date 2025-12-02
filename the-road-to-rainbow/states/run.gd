@@ -17,7 +17,9 @@ func update(_delta):
 
 func physics_update(_delta):
 	
-	if !Global.player_move:
+	if Input.is_action_just_pressed("player_attack"):
+		Transitioned.emit(self, "attack")
+	elif !Global.player_move:
 		Transitioned.emit(self, "idle")
 	elif Global.player_move and Input.is_action_just_released("player_run"):
 		Transitioned.emit(self, "walk")

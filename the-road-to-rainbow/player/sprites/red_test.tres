@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=69 format=3 uid="uid://d0dvpp8snbs1g"]
+[gd_resource type="SpriteFrames" load_steps=69 format=3 uid="uid://b5w0j3th4b3mg"]
 
 [ext_resource type="Texture2D" uid="uid://cbixkigb4qbsr" path="res://player/sprites/Master File_Blue.png" id="1_622va"]
 [ext_resource type="Texture2D" uid="uid://cflfnlls0j0xj" path="res://player/sprites/Master File_Red.png" id="1_at1wn"]
@@ -252,22 +252,22 @@ region = Rect2(1120, 1120, 160, 160)
 [resource]
 animations = [{
 "frames": [],
-"loop": true,
+"loop": false,
 "name": &"attack_down",
 "speed": 5.0
 }, {
 "frames": [],
-"loop": true,
+"loop": false,
 "name": &"attack_left",
 "speed": 5.0
 }, {
 "frames": [],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
 "speed": 5.0
 }, {
 "frames": [],
-"loop": true,
+"loop": false,
 "name": &"attack_up",
 "speed": 5.0
 }, {
