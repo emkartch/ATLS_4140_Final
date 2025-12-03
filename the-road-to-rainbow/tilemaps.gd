@@ -10,21 +10,21 @@ var num_finished = 0
 var lvl_tiles = []
 var lvl_walls = []
 var lvl_puzz = []
-var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow"]
-var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow"]
+var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow", "Grey-Green"]
+var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow", "Color-Green"]
 var puzzle_coords = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
 
 func _ready():
-	lvl_tiles = [$Red, $Orange, $Yellow]
-	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls]
-	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz]
+	lvl_tiles = [$Red, $Orange, $Yellow, $Green]
+	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls]
+	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz]
 	
-	lvl = 3
+	lvl = 4
 	change_tile_set()
 
 # Setting show and collisions per tile
 func set_collisions():
-	for i in range(0,3):
+	for i in range(0,4):
 		
 		if lvl - 1 == i:
 			lvl_tiles[i].show()
@@ -44,7 +44,10 @@ func change_tile_set():
 	else:
 		newTexture = load("res://tilesets/" + filenames_true[lvl - 1] + ".png")
 	
-	lvl_walls[lvl - 1].tile_set.get_source(0).texture = newTexture
+	if lvl == 4:
+		lvl_walls[lvl - 1].tile_set.get_source(1).texture = newTexture
+	else:
+		lvl_walls[lvl - 1].tile_set.get_source(0).texture = newTexture
 		
 	# I made a weird other tileset for this specific one, it's annoying
 	if lvl == 1:
