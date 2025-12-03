@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dti27yei47ah5"]
 
 [ext_resource type="Script" uid="uid://0s41has1f1ju" path="res://player_controller.gd" id="1_o6g0v"]
-[ext_resource type="SpriteFrames" uid="uid://b5w0j3th4b3mg" path="res://player/sprites/red_test.tres" id="2_onrkg"]
+[ext_resource type="SpriteFrames" uid="uid://cus5nvn1axpe2" path="res://player/sprites/basic_sprites.tres" id="2_1jxqw"]
 [ext_resource type="Script" uid="uid://ymbng5cu38sy" path="res://states/player_state_machine.gd" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://ccgnjn2k7y5uf" path="res://states/idle.gd" id="4_hqtel"]
 [ext_resource type="Script" uid="uid://bd1025xo7vmov" path="res://states/walk.gd" id="5_sweqy"]
@@ -16,7 +16,7 @@ scale = Vector2(4, 4)
 script = ExtResource("1_o6g0v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_onrkg")
+sprite_frames = ExtResource("2_1jxqw")
 animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
