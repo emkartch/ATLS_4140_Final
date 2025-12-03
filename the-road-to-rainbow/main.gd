@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var hud = get_node("/root/Main/HUD")
+
 var puzzle_active = false
 
 func _unhandled_input(event):

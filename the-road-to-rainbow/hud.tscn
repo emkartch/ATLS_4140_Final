@@ -1,0 +1,268 @@
+[gd_scene load_steps=19 format=3 uid="uid://ds8aae77ps3fc"]
+
+[ext_resource type="Script" uid="uid://bw3olh0ub4d0c" path="res://hud.gd" id="1_64ctp"]
+[ext_resource type="FontFile" uid="uid://b5bspum6ffekd" path="res://fonts/SourceCodePro-Bold.ttf" id="2_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://cvdbagoqtms8r" path="res://theme/arrow_icon.png" id="3_1xsix"]
+[ext_resource type="Texture2D" uid="uid://b5uoqn2mwnf81" path="res://rainbow_hud/rainbow_0.png" id="3_8sq4i"]
+[ext_resource type="Theme" uid="uid://cmjabatqf4rvy" path="res://theme/trtr_theme.tres" id="3_640wx"]
+[ext_resource type="Texture2D" uid="uid://cjmfssectndfo" path="res://theme/settings_icon.png" id="4_a2258"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sq4i"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="InputEventAction" id="InputEventAction_640wx"]
+
+[sub_resource type="Shortcut" id="Shortcut_a2258"]
+events = [SubResource("InputEventAction_640wx")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_1xsix"]
+
+[sub_resource type="Shortcut" id="Shortcut_rftc2"]
+events = [SubResource("InputEventAction_1xsix")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_rftc2"]
+
+[sub_resource type="Shortcut" id="Shortcut_61f8s"]
+events = [SubResource("InputEventAction_rftc2")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_640wx"]
+bg_color = Color(0.262643, 0.702466, 0.369465, 1)
+
+[sub_resource type="InputEventAction" id="InputEventAction_61f8s"]
+
+[sub_resource type="Shortcut" id="Shortcut_g10ll"]
+events = [SubResource("InputEventAction_61f8s")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_g10ll"]
+
+[sub_resource type="Shortcut" id="Shortcut_gpiub"]
+events = [SubResource("InputEventAction_g10ll")]
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_64ctp")
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="TitleContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -210.0
+offset_right = 330.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_640wx")
+
+[node name="TitleLabel" type="Label" parent="TitleContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_640wx")
+text = "The Road to
+Rainbow"
+horizontal_alignment = 1
+
+[node name="TitleButtonsContainer" type="PanelContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -290.0
+offset_top = -210.0
+offset_right = 290.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8sq4i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TitleButtonsContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="TitleButtonsContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_640wx")
+shortcut = SubResource("Shortcut_a2258")
+text = "Start"
+
+[node name="Spacer" type="Control" parent="TitleButtonsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SettingsButton" type="Button" parent="TitleButtonsContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_640wx")
+shortcut = SubResource("Shortcut_rftc2")
+text = "Settings"
+
+[node name="InLevel" type="CanvasLayer" parent="."]
+
+[node name="RainbowIcon" type="TextureRect" parent="InLevel"]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 148.0
+offset_bottom = 92.0
+texture = ExtResource("3_8sq4i")
+
+[node name="SettingsIconButton" type="TextureButton" parent="InLevel"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 128.0
+grow_horizontal = 0
+shortcut = SubResource("Shortcut_61f8s")
+texture_normal = ExtResource("4_a2258")
+
+[node name="PanelContainer" type="PanelContainer" parent="InLevel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 4.0
+offset_bottom = -36.0
+grow_vertical = 0
+
+[node name="HealthBar" type="ProgressBar" parent="InLevel"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -55.0
+offset_right = 420.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_640wx")
+value = 100.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="InLevel/HealthBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -19.5
+offset_right = 131.0
+offset_bottom = 19.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_8sq4i")
+theme_override_font_sizes/font_size = 30
+text = "100/100"
+
+[node name="Settings" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="ColorRect" type="ColorRect" parent="Settings"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.470588)
+
+[node name="ReturnIcon" type="TextureButton" parent="Settings"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 148.0
+offset_bottom = 148.0
+shortcut = SubResource("Shortcut_g10ll")
+texture_normal = ExtResource("3_1xsix")
+
+[node name="Control" type="Control" parent="Settings"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_640wx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -250.0
+offset_right = 198.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Settings/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Game Paused"
+
+[node name="PanelContainer" type="PanelContainer" parent="Settings/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Control/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CheckButton" type="CheckButton" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_gpiub")
+text = "Large Text"
+alignment = 1
+
+[node name="Spacer2" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer3" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer4" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer5" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer6" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer7" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer8" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="TitleButtonsContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="TitleButtonsContainer/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="InLevel/SettingsIconButton" to="." method="_on_settings_icon_button_pressed"]
+[connection signal="pressed" from="Settings/ReturnIcon" to="." method="_on_return_icon_pressed"]
+[connection signal="toggled" from="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
