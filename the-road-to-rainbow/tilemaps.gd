@@ -10,21 +10,21 @@ var num_finished = 0
 var lvl_tiles = []
 var lvl_walls = []
 var lvl_puzz = []
-var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow", "Grey-Green"]
-var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow", "Color-Green"]
+var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow", "Grey-Green", "Grey-Blue"]
+var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow", "Color-Green", "Color-Blue"]
 var puzzle_coords = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
 
 func _ready():
-	lvl_tiles = [$Red, $Orange, $Yellow, $Green]
-	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls]
-	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz]
+	lvl_tiles = [$Red, $Orange, $Yellow, $Green, $Blue]
+	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls, $Blue/Walls]
+	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz, $Blue/AccPuzz]
 	
-	lvl = 4
+	lvl = 5
 	change_tile_set()
 
 # Setting show and collisions per tile
 func set_collisions():
-	for i in range(0,4):
+	for i in range(0,5):
 		
 		if lvl - 1 == i:
 			lvl_tiles[i].show()
