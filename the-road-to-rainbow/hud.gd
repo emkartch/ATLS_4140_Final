@@ -64,6 +64,7 @@ func _on_start_button_pressed() -> void:
 
 func level_start():
 	start_game.emit()
+	Global.main_game_running = true
 
 func _on_message_timer_timeout() -> void:
 	$TitleContainer.hide()
