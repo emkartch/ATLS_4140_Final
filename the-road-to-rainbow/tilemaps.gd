@@ -2,7 +2,7 @@ extends TileMapLayer
 signal activate_puzzle(tile_coords, tileset_coords)
 
 # for tracking where we are at
-var lvl = 1
+#var lvl = 1
 var color = "red"
 var lvl_finished = false
 var num_finished = 0
@@ -19,14 +19,14 @@ func _ready():
 	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls, $Blue/Walls, $Indigo/Walls]
 	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz, $Blue/AccPuzz, $Indigo/AccPuzz]
 	
-	lvl = 6
+	#lvl = 6
 	change_tile_set()
 
 # Setting show and collisions per tile
 func set_collisions():
 	for i in range(0,5):
 		
-		if lvl - 1 == i:
+		if Global.game_lvl - 1 == i:
 			lvl_tiles[i].show()
 			lvl_walls[i].collision_enabled = true
 			lvl_puzz[i].collision_enabled = true
@@ -40,17 +40,17 @@ func change_tile_set():
 	
 	# pulls from arrays of file names for efficiency
 	if lvl_finished == false:
-		newTexture = load("res://tilesets/" + filenames_false[lvl - 1] + ".png")
+		newTexture = load("res://tilesets/" + filenames_false[Global.game_lvl - 1] + ".png")
 	else:
-		newTexture = load("res://tilesets/" + filenames_true[lvl - 1] + ".png")
+		newTexture = load("res://tilesets/" + filenames_true[Global.game_lvl - 1] + ".png")
 	
-	if lvl == 4:
-		lvl_walls[lvl - 1].tile_set.get_source(1).texture = newTexture
+	if Global.game_lvl == 4:
+		lvl_walls[Global.game_lvl - 1].tile_set.get_source(1).texture = newTexture
 	else:
-		lvl_walls[lvl - 1].tile_set.get_source(0).texture = newTexture
+		lvl_walls[Global.game_lvl - 1].tile_set.get_source(0).texture = newTexture
 		
 	# I made a weird other tileset for this specific one, it's annoying
-	if lvl == 1:
+	if Global.game_lvl == 1:
 		$Red/AccPuzz.tile_set.get_source(1).texture = newTexture
 	
 	# This is all old code, IGNORE THIS
@@ -82,11 +82,11 @@ func check_for_puzzle_click(sprite_pos):
 	# Where is the mouse in global coords?
 	var mouse_pos = get_global_mouse_position()
 	# Where is the tile on the tilemap layer?
-	var tile_pos = lvl_puzz[lvl - 1].local_to_map(mouse_pos)
+	var tile_pos = lvl_puzz[Global.game_lvl - 1].local_to_map(mouse_pos)
 	# Where is the tile in global coords?
-	var tile_map_coords = lvl_puzz[lvl - 1].map_to_local(tile_pos)
+	var tile_map_coords = lvl_puzz[Global.game_lvl - 1].map_to_local(tile_pos)
 	# Where is the tile in the tileset?
-	var tileset_coords = lvl_puzz[lvl - 1].get_cell_atlas_coords(tile_pos)
+	var tileset_coords = lvl_puzz[Global.game_lvl - 1].get_cell_atlas_coords(tile_pos)
 	print(tileset_coords)
 	
 	if tileset_coords!= Vector2i(-1,-1):

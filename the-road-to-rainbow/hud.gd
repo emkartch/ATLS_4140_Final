@@ -5,15 +5,15 @@ signal start_game
 
 @onready var main = get_node("/root/Main")
 @onready var theme = preload("res://theme/trtr_theme.tres")
-
-var tileMap = null
+@onready var tileMap = get_node("/root/Main/allTiles")
 
 func _ready():
 	$InLevel.hide()
 	$Settings.hide()
+	tileMap.hide()
 	
-func level_remove():
-	tileMap.queue_free()
+#func level_remove():
+	#tileMap.queue_free()
 	
 #func level_reset():
 	#tileMap = preload("res://tilemaps.tscn").instantiate()
@@ -22,8 +22,8 @@ func level_remove():
 
 func show_game_over():
 	$InLevel.hide()
-	Global.lever_number = 0
-	level_remove()
+	Global.game_level = 1
+	#level_remove()
 	show_message("Game Over")
 	# Wait until the MessageTimer has counted down.
 	await $MessageTimer.timeout
@@ -32,12 +32,13 @@ func show_game_over():
 	$TitleContainer.show()
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
+	$TitleScreen.show()
 	$TitleButtonsContainer.show()
 	
 func show_win():
 	$InLevel.hide()
-	Global.lever_number = 0
-	level_remove()
+	Global.game_level = 1
+	#level_remove()
 	show_message("You win!")
 	
 	# Wait until the MessageTimer has counted down.
@@ -47,6 +48,7 @@ func show_win():
 	$TitleContainer.show()
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
+	$TitleScreen.show()
 	$TitleButtonsContainer.show()
 
 func show_message(text):
@@ -55,6 +57,7 @@ func show_message(text):
 	$MessageTimer.start()
 
 func _on_start_button_pressed() -> void:
+	$TitleScreen.hide()
 	$TitleContainer.hide()
 	$TitleButtonsContainer.hide()
 	%RainbowIcon.texture = load("res://rainbow_hud/rainbow_0.png")
@@ -64,13 +67,12 @@ func _on_start_button_pressed() -> void:
 
 func level_start():
 	start_game.emit()
-	Global.main_game_running = true
 
 func _on_message_timer_timeout() -> void:
 	$TitleContainer.hide()
 
 func show_settings():
-	get_tree().paused = true
+	main.get_tree().paused = true
 	if Global.main_game_running == false:
 		$TitleButtonsContainer.hide()
 		$TitleContainer.hide()
@@ -87,7 +89,7 @@ func _on_return_icon_pressed() -> void:
 	if Global.main_game_running == false:
 		$TitleButtonsContainer.show()
 		$TitleContainer.show()
-	get_tree().paused = false
+	main.get_tree().paused = false
 
 func _on_check_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:

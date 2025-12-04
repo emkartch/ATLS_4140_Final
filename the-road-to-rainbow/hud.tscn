@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://ds8aae77ps3fc"]
+[gd_scene load_steps=20 format=3 uid="uid://ds8aae77ps3fc"]
 
 [ext_resource type="Script" uid="uid://bw3olh0ub4d0c" path="res://hud.gd" id="1_64ctp"]
 [ext_resource type="FontFile" uid="uid://b5bspum6ffekd" path="res://fonts/SourceCodePro-Bold.ttf" id="2_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://px4ix5epwkcm" path="res://theme/title_background.png" id="2_rftc2"]
 [ext_resource type="Texture2D" uid="uid://cvdbagoqtms8r" path="res://theme/arrow_icon.png" id="3_1xsix"]
 [ext_resource type="Texture2D" uid="uid://b5uoqn2mwnf81" path="res://rainbow_hud/rainbow_0.png" id="3_8sq4i"]
 [ext_resource type="Theme" uid="uid://cmjabatqf4rvy" path="res://theme/trtr_theme.tres" id="3_640wx"]
@@ -41,6 +42,14 @@ events = [SubResource("InputEventAction_g10ll")]
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_64ctp")
+
+[node name="TitleScreen" type="CanvasLayer" parent="."]
+layer = -30
+
+[node name="TextureRect" type="TextureRect" parent="TitleScreen"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_rftc2")
 
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
