@@ -24,7 +24,12 @@ func _ready():
 
 func show_game_over():
 	$InLevel.hide()
-	Global.game_level = 1
+	tileMap.hide()
+	player.hide()
+	get_tree().call_group("mobs", "queue_free")
+	$TitleScreen.show()
+	%RainbowIcon.texture = load("res://rainbow_hud/rainbow_0.png")
+	Global.game_lvl = 1
 	#level_remove()
 	show_message("Game Over")
 	# Wait until the MessageTimer has counted down.
@@ -34,12 +39,16 @@ func show_game_over():
 	$TitleContainer.show()
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
-	$TitleScreen.show()
 	$TitleButtonsContainer.show()
 	
 func show_win():
 	$InLevel.hide()
-	Global.game_level = 1
+	tileMap.hide()
+	player.hide()
+	get_tree().call_group("mobs", "queue_free")
+	$TitleScreen.show()
+	%RainbowIcon.texture = load("res://rainbow_hud/rainbow_0.png")
+	Global.game_lvl = 1
 	#level_remove()
 	show_message("You win!")
 	
@@ -50,7 +59,6 @@ func show_win():
 	$TitleContainer.show()
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
-	$TitleScreen.show()
 	$TitleButtonsContainer.show()
 
 func show_message(text):

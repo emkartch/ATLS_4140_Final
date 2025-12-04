@@ -17,7 +17,7 @@ size = Vector2(23.75, 13)
 size = Vector2(24.75, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b26j0"]
-size = Vector2(26, 28)
+size = Vector2(26, 15.25)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(4, 4)
@@ -28,20 +28,21 @@ sprite_frames = ExtResource("2_1jxqw")
 animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.125, 8)
+position = Vector2(-0.75, 7.5)
 shape = SubResource("RectangleShape2D_ob8u7")
 
 [node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0.5, 7.75)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-1.125, 8)
+position = Vector2(-1.25, -0.25)
 shape = SubResource("RectangleShape2D_1jxqw")
 
 [node name="PunchArea" type="Area2D" parent="."]
 
 [node name="PunchBox" type="CollisionShape2D" parent="PunchArea"]
 unique_name_in_owner = true
-position = Vector2(-1, 0)
+position = Vector2(-1, 7.375)
 shape = SubResource("RectangleShape2D_b26j0")
 
 [node name="Camera2D" type="Camera2D" parent="."]

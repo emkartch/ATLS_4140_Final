@@ -29,15 +29,12 @@ func _on_animation_finished():
 	anim_name = animatedSprite.animation
 	
 	if anim_name == "death_up" or anim_name == "death_down" or anim_name == "death_left" or anim_name == "death_right":
-		Global.wound_animation = false
+		Global.player_speed = 300
+		await get_tree().create_timer(1.0).timeout
 		hud.show_game_over()
 	elif anim_name == "hurt_up" or anim_name == "hurt_down" or anim_name == "hurt_left" or anim_name == "hurt_right":
-		Global.wound_animation = false
+		Global.player_speed = 300
 		Transitioned.emit(self, "idle")
 	elif anim_name == "attack_up" or anim_name == "attack_down" or anim_name == "attack_left" or anim_name == "attack_right":
 		%PunchBox.disabled = true
 		Transitioned.emit(self, "idle")
-
-#func _on_attack_finished():
-	#%PunchBox.disabled = true
-	#Transitioned.emit(self, "idle")

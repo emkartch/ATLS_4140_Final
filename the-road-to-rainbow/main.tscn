@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://jw7mg0bdtxoi"]
+[gd_scene load_steps=6 format=3 uid="uid://jw7mg0bdtxoi"]
 
 [ext_resource type="PackedScene" uid="uid://dti27yei47ah5" path="res://player.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://7ib15fas0fmj" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://og8afxf2gjr" path="res://tilemaps.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ds8aae77ps3fc" path="res://hud.tscn" id="4_1bvp3"]
+
+[sub_resource type="Curve2D" id="Curve2D_1bvp3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 270, 0, 0, 0, 0, 0, 270, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h2yge")
@@ -11,6 +17,12 @@ script = ExtResource("1_h2yge")
 [node name="allTiles" parent="." instance=ExtResource("2_h2yge")]
 
 [node name="Player" parent="." instance=ExtResource("1_0xm2m")]
+
+[node name="Path2D" type="Path2D" parent="Player"]
+curve = SubResource("Curve2D_1bvp3")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
+unique_name_in_owner = true
 
 [node name="HUD" parent="." instance=ExtResource("4_1bvp3")]
 

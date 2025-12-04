@@ -25,30 +25,32 @@ func _ready():
 	
 func _process(delta):
 	if Global.main_game_running:
-		if !Global.wound_animation:
-			var velocity1 = Vector2.ZERO # The player's movement vector.
-			if Input.is_action_pressed("player_right"):
-				velocity1.x += 1
-				Global.cur_direction = "right"
-			if Input.is_action_pressed("player_left"):
-				velocity1.x -= 1
-				Global.cur_direction = "left"
-			if Input.is_action_pressed("player_down"):
-				velocity1.y += 1
-				Global.cur_direction = "down"
-			if Input.is_action_pressed("player_up"):
-				velocity1.y -= 1
-				Global.cur_direction = "up"
+		var velocity1 = Vector2.ZERO # The player's movement vector.
+		#if !Global.wound_animation:
+		if Input.is_action_pressed("player_right"):
+			velocity1.x += 1
+			Global.cur_direction = "right"
+		if Input.is_action_pressed("player_left"):
+			velocity1.x -= 1
+			Global.cur_direction = "left"
+		if Input.is_action_pressed("player_down"):
+			velocity1.y += 1
+			Global.cur_direction = "down"
+		if Input.is_action_pressed("player_up"):
+			velocity1.y -= 1
+			Global.cur_direction = "up"
 
-			if velocity1.length() > 0:
-				velocity1 = velocity1.normalized() * Global.player_speed
-				Global.player_move = true
-			else:
-				Global.player_move = false
-			
-			position += velocity1 * delta
+		if velocity1.length() > 0:
+			velocity1 = velocity1.normalized() * Global.player_speed
+			print(velocity1)
+			Global.player_move = true
+		else:
+			Global.player_move = false
+		
+		position += velocity1 * delta
 
-			move_and_slide()
+		move_and_slide()
+		#move_and_collide(position)
 	
 	#if Input.is_action_just_pressed("input_test"):
 		#if test_tracker == 0:
@@ -64,10 +66,11 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 		return
 	if body is CharacterBody2D:
 		health -= 10
-		Global.wound_animation = true
+		Global.player_speed = 0
 		#Global.direction_animation_update("stagger")
-		healthBar.value = health
-		healthBarText.text = str(int(health)) + "/" + str(int(Global.max_player_health))
+		if !health == 0:
+			healthBar.value = health
+			healthBarText.text = str(int(health)) + "/" + str(int(Global.max_player_health))
 		if health <= 0.0:
 			#hide() # Player disappears after being hit.
 			health_depleted.emit()

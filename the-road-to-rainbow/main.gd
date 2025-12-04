@@ -6,7 +6,13 @@ extends Node2D
 @onready var healthBar = get_node("/root/Main/HUD/InLevel/HealthBar")
 @onready var healthBarText = get_node("/root/Main/HUD/InLevel/HealthBar/HealthLabel")
 
+var tile_cell_size = Vector2(144,144)
+
+var start_position = Vector2(4,2) * tile_cell_size
+
 var puzzle_active = false
+
+var r_minions = [Vector2(6,3)]
 
 func _unhandled_input(event):
 	if !puzzle_active:
@@ -19,21 +25,28 @@ func _unhandled_input(event):
 func activate_puzzle(tile_coords, tileset_coords):
 	print("Activated puzzle!", tile_coords, tileset_coords)
 
+func spawn_mob(position):
+	%PathFollow2D.progress_ratio = randf()
+	var new_mob = preload("res://mob.tscn").instantiate()
+	new_mob.global_position = %PathFollow2D.global_position
+	new_mob.position = position
+	add_child(new_mob)
 
 func _on_hud_start_game() -> void:
 	healthBar.value = Global.max_player_health
 	healthBarText.text = str(int(player.health)) + "/" + str(int(Global.max_player_health))
 	Global.game_lvl = 1
+	player.position = start_position
 	player.show()
 	tileMap.show()
 
-	#for vector in minion_locations:
-		#var location = vector * tile_cell_size
-		#spawn_mob(Vector2(1,1),3,location)
+	for vector in r_minions:
+		var location = vector * tile_cell_size
+		spawn_mob(location)
+		
 	Global.main_game_running = true
 
 
 func _on_player_health_depleted() -> void:
-	get_tree().call_group("mobs", "queue_free")
 	Global.main_game_running = false
 	Global.player_death = true
