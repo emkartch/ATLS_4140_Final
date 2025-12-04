@@ -10,16 +10,16 @@ var num_finished = 0
 var lvl_tiles = []
 var lvl_walls = []
 var lvl_puzz = []
-var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow", "Grey-Green", "Grey-Blue"]
-var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow", "Color-Green", "Color-Blue"]
+var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow", "Grey-Green", "Grey-Blue", "Grey-Indigo"]
+var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow", "Color-Green", "Color-Blue", "Color-Indigo"]
 var puzzle_coords = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
 
 func _ready():
-	lvl_tiles = [$Red, $Orange, $Yellow, $Green, $Blue]
-	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls, $Blue/Walls]
-	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz, $Blue/AccPuzz]
+	lvl_tiles = [$Red, $Orange, $Yellow, $Green, $Blue, $Indigo]
+	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls, $Blue/Walls, $Indigo/Walls]
+	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz, $Blue/AccPuzz, $Indigo/AccPuzz]
 	
-	lvl = 5
+	lvl = 6
 	change_tile_set()
 
 # Setting show and collisions per tile
