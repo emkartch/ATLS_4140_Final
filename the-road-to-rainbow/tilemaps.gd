@@ -18,13 +18,14 @@ func _ready():
 	lvl_tiles = [$Red, $Orange, $Yellow, $Green, $Blue, $Indigo]
 	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls, $Blue/Walls, $Indigo/Walls]
 	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz, $Blue/AccPuzz, $Indigo/AccPuzz]
-	
-	#lvl = 6
+
 	change_tile_set()
 
 # Setting show and collisions per tile
 func set_collisions():
-	for i in range(0,5):
+	for i in range(0,6):
+	
+		print(lvl_tiles[i])
 		
 		if Global.game_lvl - 1 == i:
 			lvl_tiles[i].show()
@@ -37,6 +38,7 @@ func set_collisions():
 
 func change_tile_set():
 	var newTexture
+	#print(Global.game_lvl)
 	
 	# pulls from arrays of file names for efficiency
 	if lvl_finished == false:
