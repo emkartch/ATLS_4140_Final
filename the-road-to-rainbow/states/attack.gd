@@ -1,15 +1,43 @@
 extends State
 class_name attack
 
-@export var player : CharacterBody2D
+@export var Player : CharacterBody2D
 
 @onready var animatedSprite: AnimatedSprite2D = get_node("/root/Main/Player/AnimatedSprite2D")
+@onready var punchArea = get_node("/root/Main/Player/PunchArea")
+@onready var hud = get_node("/root/Main/HUD")
+@onready var anim_name = null
 
 func _ready():
-	animatedSprite.animation_finished.connect(_on_attack_finished)
-	
+	animatedSprite.animation_finished.connect(_on_animation_finished)
+
 func enter():
 	animatedSprite.play("attack_" + Global.cur_direction)
+	
+	if Global.cur_direction == "up":
+		punchArea.position = Vector2(0,-13)
+	elif Global.cur_direction == "down":
+		punchArea.position = Vector2(0,13)
+	elif Global.cur_direction == "left":
+		punchArea.position = Vector2(-13,0)
+	elif Global.cur_direction == "right":
+		punchArea.position = Vector2(13,0)
+		
+	%PunchBox.disabled = false
 
-func _on_attack_finished():
-	Transitioned.emit(self, "idle")
+func _on_animation_finished():
+	anim_name = animatedSprite.animation
+	
+	if anim_name == "death_up" or anim_name == "death_down" or anim_name == "death_left" or anim_name == "death_right":
+		Global.wound_animation = false
+		hud.show_game_over()
+	elif anim_name == "hurt_up" or anim_name == "hurt_down" or anim_name == "hurt_left" or anim_name == "hurt_right":
+		Global.wound_animation = false
+		Transitioned.emit(self, "idle")
+	elif anim_name == "attack_up" or anim_name == "attack_down" or anim_name == "attack_left" or anim_name == "attack_right":
+		%PunchBox.disabled = true
+		Transitioned.emit(self, "idle")
+
+#func _on_attack_finished():
+	#%PunchBox.disabled = true
+	#Transitioned.emit(self, "idle")

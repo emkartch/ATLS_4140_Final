@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dti27yei47ah5"]
+[gd_scene load_steps=13 format=3 uid="uid://dti27yei47ah5"]
 
 [ext_resource type="Script" uid="uid://0s41has1f1ju" path="res://player_controller.gd" id="1_o6g0v"]
 [ext_resource type="SpriteFrames" uid="uid://cus5nvn1axpe2" path="res://player/sprites/basic_sprites.tres" id="2_1jxqw"]
@@ -7,9 +7,17 @@
 [ext_resource type="Script" uid="uid://bd1025xo7vmov" path="res://states/walk.gd" id="5_sweqy"]
 [ext_resource type="Script" uid="uid://rjf5in3lxlga" path="res://states/run.gd" id="6_2hs0m"]
 [ext_resource type="Script" uid="uid://c2mkqg8nswcdl" path="res://states/attack.gd" id="7_1jxqw"]
+[ext_resource type="Script" uid="uid://cdrsmpm1wax2m" path="res://states/hurt.gd" id="8_dw050"]
+[ext_resource type="Script" uid="uid://dn52hpyfbcw0j" path="res://states/death.gd" id="9_b26j0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8u7"]
-size = Vector2(25.75, 30)
+size = Vector2(23.75, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jxqw"]
+size = Vector2(24.75, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b26j0"]
+size = Vector2(26, 28)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(4, 4)
@@ -20,8 +28,21 @@ sprite_frames = ExtResource("2_1jxqw")
 animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.625, 1)
+position = Vector2(-1.125, 8)
 shape = SubResource("RectangleShape2D_ob8u7")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-1.125, 8)
+shape = SubResource("RectangleShape2D_1jxqw")
+
+[node name="PunchArea" type="Area2D" parent="."]
+
+[node name="PunchBox" type="CollisionShape2D" parent="PunchArea"]
+unique_name_in_owner = true
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_b26j0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -29,22 +50,35 @@ shape = SubResource("RectangleShape2D_ob8u7")
 script = ExtResource("3_i3pqv")
 initial_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+[node name="idle" type="Node" parent="State Machine" node_paths=PackedStringArray("Player")]
 script = ExtResource("4_hqtel")
-player = NodePath("../..")
+Player = NodePath("../..")
 metadata/_custom_type_script = "uid://ccgnjn2k7y5uf"
 
-[node name="walk" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+[node name="walk" type="Node" parent="State Machine" node_paths=PackedStringArray("Player")]
 script = ExtResource("5_sweqy")
-player = NodePath("../..")
+Player = NodePath("../..")
 metadata/_custom_type_script = "uid://bd1025xo7vmov"
 
-[node name="run" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+[node name="run" type="Node" parent="State Machine" node_paths=PackedStringArray("Player")]
 script = ExtResource("6_2hs0m")
-player = NodePath("../..")
+Player = NodePath("../..")
 metadata/_custom_type_script = "uid://rjf5in3lxlga"
 
-[node name="attack" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+[node name="attack" type="Node" parent="State Machine" node_paths=PackedStringArray("Player")]
 script = ExtResource("7_1jxqw")
-player = NodePath("../..")
+Player = NodePath("../..")
 metadata/_custom_type_script = "uid://c2mkqg8nswcdl"
+
+[node name="hurt" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_dw050")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://cdrsmpm1wax2m"
+
+[node name="death" type="Node" parent="State Machine" node_paths=PackedStringArray("Player")]
+script = ExtResource("9_b26j0")
+Player = NodePath("../..")
+metadata/_custom_type_script = "uid://dn52hpyfbcw0j"
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="PunchArea" to="." method="_on_punch_area_body_entered"]

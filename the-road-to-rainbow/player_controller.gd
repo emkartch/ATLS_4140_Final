@@ -21,6 +21,7 @@ func _ready():
 	position = Vector2(577, 300)
 	$AnimatedSprite2D.sprite_frames = basic_sprites
 	$AnimatedSprite2D.play("idle_down")
+	%PunchBox.disabled = true
 	
 func _process(delta):
 	if Global.main_game_running:
@@ -57,7 +58,8 @@ func _process(delta):
 			#$AnimatedSprite2D.sprite_frames = basic_sprites
 			#test_tracker = 0
 
-func _on_body_entered(body) -> void:
+
+func _on_hurt_box_body_entered(body: Node2D) -> void:
 	if body == self:
 		return
 	if body is CharacterBody2D:
@@ -67,5 +69,10 @@ func _on_body_entered(body) -> void:
 		healthBar.value = health
 		healthBarText.text = str(int(health)) + "/" + str(int(Global.max_player_health))
 		if health <= 0.0:
-			hide() # Player disappears after being hit.
+			#hide() # Player disappears after being hit.
 			health_depleted.emit()
+
+
+func _on_punch_area_body_entered(body: Node2D) -> void:
+	if body != self and body.has_method("mob_take_damage"):
+		body.mob_take_damage()

@@ -1,7 +1,7 @@
 extends State
 class_name idle
 
-@export var player : CharacterBody2D
+@export var Player : CharacterBody2D
 
 @onready var animatedSprite: AnimatedSprite2D = get_node("/root/Main/Player/AnimatedSprite2D")
 
@@ -16,7 +16,9 @@ func update(_delta):
 		
 func physics_update(_delta):
 	
-	if Global.wound_animation:
+	if Global.player_death:
+		Transitioned.emit(self, "death")
+	elif Global.wound_animation:
 		Transitioned.emit(self, "hurt")
 	elif Input.is_action_just_pressed("player_attack"):
 		Transitioned.emit(self, "attack")

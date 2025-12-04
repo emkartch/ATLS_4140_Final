@@ -2,10 +2,13 @@ extends Node
 
 @export var initial_state : State
 
+@onready var animatedSprite: AnimatedSprite2D = get_node("/root/Main/Player/AnimatedSprite2D")
+
 var current_state : State
 var states : Dictionary = {}
 
 func _ready():
+	
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child

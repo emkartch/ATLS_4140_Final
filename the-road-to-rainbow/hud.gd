@@ -6,11 +6,13 @@ signal start_game
 @onready var main = get_node("/root/Main")
 @onready var theme = preload("res://theme/trtr_theme.tres")
 @onready var tileMap = get_node("/root/Main/allTiles")
+@onready var player = get_node("/root/Main/Player")
 
 func _ready():
 	$InLevel.hide()
 	$Settings.hide()
 	tileMap.hide()
+	player.hide()
 	
 #func level_remove():
 	#tileMap.queue_free()
