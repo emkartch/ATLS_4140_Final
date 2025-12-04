@@ -16,7 +16,9 @@ func update(_delta):
 		
 func physics_update(_delta):
 	
-	if Input.is_action_just_pressed("player_attack"):
+	if Global.wound_animation:
+		Transitioned.emit(self, "hurt")
+	elif Input.is_action_just_pressed("player_attack"):
 		Transitioned.emit(self, "attack")
 	elif Global.player_move:
 		if Input.is_action_pressed("player_run"):
