@@ -21,3 +21,5 @@ var player_death = false
 var opening_cutscene = true
 
 var puzzle_running = false
+
+var puzzle_difficulty = 50
