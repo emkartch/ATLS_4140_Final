@@ -13,7 +13,13 @@ var start_position = Vector2(4,2) * tile_cell_size
 
 var puzzle_active = false
 
-var r_minions = [Vector2(6,3)]
+var r_minions = [Vector2(6,3),Vector2(3,14),Vector2(14,5),Vector2(19,19)]
+var o_minions = [Vector2(5,7),Vector2(12,7),Vector2(19,13),Vector2(22,20)]
+var y_minions = [Vector2(8,3),Vector2(22,10),Vector2(23,20),Vector2(8,13)]
+var g_minions = [Vector2(9,2),Vector2(17,10),Vector2(23,20),Vector2(1,21)]
+var b_minions = [Vector2(4,6),Vector2(8,11),Vector2(21,7),Vector2(3,20)]
+var i_minions = [Vector2(4,13),Vector2(11,19),Vector2(11,5),Vector2(21,18)]
+var v_minions = [Vector2(3,6),Vector2(21,3),Vector2(16,11),Vector2(2,14)]
 
 func _ready():
 	Global.game_lvl = 1
