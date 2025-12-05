@@ -1,6 +1,7 @@
 extends TileMapLayer
 signal activate_puzzle(tile_coords, tileset_coords)
 signal level_up
+signal hud_alert(alert_code)
 
 # for tracking where we are at
 #var lvl = 1
@@ -89,7 +90,7 @@ func check_for_puzzle_click(sprite_pos):
 		
 		# How far away is the player from the clicked tile?
 		var pos_delta = tile_map_coords - sprite_pos
-		print("Delta:", pos_delta)
+		#print("Delta:", pos_delta)
 		
 		# Is the player near enough to the tile?
 		var is_near_enough = false
@@ -106,6 +107,8 @@ func check_for_puzzle_click(sprite_pos):
 			if tile_map_coords not in completed_puzzles:
 				activate_puzzle.emit(tile_map_coords, tileset_coords)
 				completed_puzzles.append(tile_map_coords)
+			else:
+				hud_alert.emit("Puzzle already completed")
 				#print(completed_puzzles)
 			
 			if num_finished >= 5:
@@ -114,7 +117,12 @@ func check_for_puzzle_click(sprite_pos):
 		#Checking if the player has clicked the finish puzzle tile after completing all puzzles
 		elif tileset_coords in finish_coords and is_near_2:
 			if num_finished >= 5:
+				hud_alert.emit("Next level!")
 				level_up.emit()
+			else:
+				hud_alert.emit("Puzzles left to complete: " + str((5 - num_finished)))
+		elif tileset_coords in puzzle_coords and is_near_enough == false:
+			hud_alert.emit("Too far away")
 
 # Looks for mouse clicks (releases, not presses)
 #func _unhandled_input(event):

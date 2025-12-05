@@ -13,6 +13,7 @@ func _ready():
 	$Settings.hide()
 	tileMap.hide()
 	player.hide()
+	$Alerts.hide()
 	
 #func level_remove():
 	#tileMap.queue_free()
@@ -116,3 +117,14 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 		%HealthBar.size.y = 35
 		%HealthBar.position.y = 665
 		%HealthLabel.add_theme_font_size_override("font_size", 30)
+		
+func hud_alert(code):
+	$Alerts/AlertText.text = code
+	
+	$Alerts.show()
+	$Alerts/Timer.start()
+		
+	await $Alerts/Timer.timeout
+	#print("timed out")
+	$Alerts.hide()
+	

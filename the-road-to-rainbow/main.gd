@@ -31,6 +31,10 @@ func _unhandled_input(event):
 func activate_puzzle(tile_coords, tileset_coords):
 	print("Activated puzzle!", tile_coords, tileset_coords)
 	$allTiles.num_finished += 1 # This should only happen AFTER puzzle is completed
+	if $allTiles.num_finished < 5:
+		$HUD.hud_alert("Puzzles completed: " + str($allTiles.num_finished) + "/5")
+	else:
+		$HUD.hud_alert("You've restored a color!")
 
 func spawn_mob(pos):
 	%PathFollow2D.progress_ratio = randf()
@@ -65,11 +69,16 @@ func next_level():
 		end_game_cutscene()
 	
 	#resetting level variables
+	Global.player_death = false
+	#$Player/AnimatedSprite2D.play("idle_down")
 	$allTiles.lvl_finished = false
 	$allTiles.num_finished = 0
 	$allTiles.completed_puzzles = []
 	$allTiles.change_tile_set()
 	$Player.position = start_position
+	
+func hud_alert(code):
+	$HUD.hud_alert(code)
 
 # ADD: music and a "yay you did it" here
 func end_game_cutscene():
