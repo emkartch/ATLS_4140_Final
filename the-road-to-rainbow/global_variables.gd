@@ -17,3 +17,5 @@ var game_lvl = 1
 var max_player_health = 100
 
 var player_death = false
+
+var opening_cutscene = false

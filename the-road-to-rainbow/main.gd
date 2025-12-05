@@ -17,6 +17,7 @@ var r_minions = [Vector2(6,3)]
 func _ready():
 	Global.game_lvl = 1
 	$allTiles.change_tile_set()
+	$HUD/Cards.hide()
 
 func _unhandled_input(event):
 	if !puzzle_active:
@@ -82,4 +83,7 @@ func hud_alert(code):
 
 # ADD: music and a "yay you did it" here
 func end_game_cutscene():
-	pass;
+	$HUD.run_end_cards()
+	
+func change_player_color():
+	$Player.change_color()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dti27yei47ah5"]
+[gd_scene load_steps=16 format=3 uid="uid://dti27yei47ah5"]
 
 [ext_resource type="Script" uid="uid://0s41has1f1ju" path="res://player_controller.gd" id="1_o6g0v"]
 [ext_resource type="SpriteFrames" uid="uid://cus5nvn1axpe2" path="res://player/sprites/basic_sprites.tres" id="2_1jxqw"]
@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://c2mkqg8nswcdl" path="res://states/attack.gd" id="7_1jxqw"]
 [ext_resource type="Script" uid="uid://cdrsmpm1wax2m" path="res://states/hurt.gd" id="8_dw050"]
 [ext_resource type="Script" uid="uid://dn52hpyfbcw0j" path="res://states/death.gd" id="9_b26j0"]
+[ext_resource type="AudioStream" uid="uid://dlyw30mu7akju" path="res://sounds/hurt.wav" id="10_n7ghd"]
+[ext_resource type="AudioStream" uid="uid://cr7icv1fcnit6" path="res://sounds/death.wav" id="11_nvl01"]
+[ext_resource type="AudioStream" uid="uid://x0v7f1scas36" path="res://sounds/punch.wav" id="12_ivps1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8u7"]
 size = Vector2(23.75, 13)
@@ -80,6 +83,18 @@ metadata/_custom_type_script = "uid://cdrsmpm1wax2m"
 script = ExtResource("9_b26j0")
 Player = NodePath("../..")
 metadata/_custom_type_script = "uid://dn52hpyfbcw0j"
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_n7ghd")
+volume_db = -6.0
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_nvl01")
+volume_db = -6.0
+
+[node name="punch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ivps1")
+volume_db = -6.0
 
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="PunchArea" to="." method="_on_punch_area_body_entered"]

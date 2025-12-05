@@ -15,6 +15,8 @@ var b_sprites: SpriteFrames = preload("res://player/sprites/blue_sprites.tres")
 var i_sprites: SpriteFrames = preload("res://player/sprites/indigo_sprites.tres")
 var v_sprites: SpriteFrames = preload("res://player/sprites/violet_sprites.tres")
 
+var sprite_array = [r_sprites, o_sprites, y_sprites, g_sprites, b_sprites, i_sprites, v_sprites]
+
 var test_tracker = 0
 
 func _ready():
@@ -69,6 +71,7 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 	if body == self:
 		return
 	if body is CharacterBody2D:
+		$hurt.play()
 		health -= 10
 		Global.player_speed = 0
 		#Global.direction_animation_update("stagger")
@@ -78,8 +81,13 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 		if health <= 0.0:
 			#hide() # Player disappears after being hit.
 			health_depleted.emit()
+			$death.play()
 
 
 func _on_punch_area_body_entered(body: Node2D) -> void:
 	if body != self and body.has_method("mob_take_damage"):
 		body.mob_take_damage()
+		$punch.play()
+		
+func change_color():
+	$AnimatedSprite2D.sprite_frames = sprite_array[Global.game_lvl - 1]

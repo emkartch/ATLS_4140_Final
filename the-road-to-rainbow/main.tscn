@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://jw7mg0bdtxoi"]
+[gd_scene load_steps=6 format=3 uid="uid://jw7mg0bdtxoi"]
 
 [ext_resource type="PackedScene" uid="uid://dti27yei47ah5" path="res://player.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://7ib15fas0fmj" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://og8afxf2gjr" path="res://tilemaps.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ds8aae77ps3fc" path="res://hud.tscn" id="4_1bvp3"]
-[ext_resource type="AudioStream" uid="uid://cndj5hmtpyb1r" path="res://sounds/MoonshadowLoop.mp3" id="5_lquwl"]
 
 [sub_resource type="Curve2D" id="Curve2D_1bvp3"]
 _data = {
@@ -27,11 +26,8 @@ unique_name_in_owner = true
 
 [node name="HUD" parent="." instance=ExtResource("4_1bvp3")]
 
-[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_lquwl")
-volume_db = -5.174
-
 [connection signal="activate_puzzle" from="allTiles" to="." method="activate_puzzle"]
+[connection signal="change_player_color" from="allTiles" to="." method="change_player_color"]
 [connection signal="hud_alert" from="allTiles" to="." method="hud_alert"]
 [connection signal="level_up" from="allTiles" to="." method="next_level"]
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
