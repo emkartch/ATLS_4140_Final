@@ -6,6 +6,7 @@ extends Node2D
 @onready var tileMap = get_node("/root/Main/allTiles")
 @onready var healthBar = get_node("/root/Main/HUD/InLevel/HealthBar")
 @onready var healthBarText = get_node("/root/Main/HUD/InLevel/HealthBar/HealthLabel")
+@onready var rain_icon = get_node("/root/Main/HUD/InLevel/RainbowIcon")
 
 var tile_cell_size_start = Vector2(144,144)
 var tile_cell_size = Vector2(128,128)
@@ -21,6 +22,16 @@ var g_minions = [Vector2(9,2),Vector2(17,10),Vector2(23,20),Vector2(1,21)]
 var b_minions = [Vector2(4,6),Vector2(8,11),Vector2(21,7),Vector2(3,20)]
 var i_minions = [Vector2(4,13),Vector2(11,19),Vector2(11,5),Vector2(21,18)]
 var v_minions = [Vector2(3,6),Vector2(21,3),Vector2(16,11),Vector2(2,14)]
+
+var r_rain = preload("res://rainbow_hud/rainbow_1.png")
+var o_rain = preload("res://rainbow_hud/rainbow_2.png")
+var y_rain = preload("res://rainbow_hud/rainbow_3.png")
+var g_rain = preload("res://rainbow_hud/rainbow_4.png")
+var b_rain = preload("res://rainbow_hud/rainbow_5.png")
+var i_rain = preload("res://rainbow_hud/rainbow_6.png")
+var v_rain = preload("res://rainbow_hud/rainbow_7.png")
+
+var rainbow_icon_img = [r_rain,o_rain,y_rain,g_rain,b_rain,i_rain,v_rain]
 
 var minion_array = [r_minions,o_minions,y_minions,g_minions,b_minions,i_minions,v_minions]
 
@@ -109,4 +120,4 @@ func end_game_cutscene():
 	
 func change_player_color():
 	$Player.change_color()
-	
+	rain_icon.texture = rainbow_icon_img[Global.game_lvl - 1]
