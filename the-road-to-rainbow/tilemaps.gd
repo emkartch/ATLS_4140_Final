@@ -109,22 +109,20 @@ func check_for_puzzle_click(sprite_pos):
 				activate_puzzle.emit(tile_map_coords, tileset_coords)
 				completed_puzzles.append(tile_map_coords)
 			else:
-				hud_alert.emit("Puzzle already completed")
+				if Global.puzzle_running == false:
+					hud_alert.emit("Puzzle already completed")
 				#print(completed_puzzles)
-			
-			if num_finished >= 5:
-				lvl_finished = true
-				change_tile_set()
-				change_player_color.emit()
 		#Checking if the player has clicked the finish puzzle tile after completing all puzzles
 		elif tileset_coords in finish_coords and is_near_2:
 			if num_finished >= 5:
 				hud_alert.emit("Next level!")
 				level_up.emit()
 			else:
-				hud_alert.emit("Puzzles left to complete: " + str((5 - num_finished)))
+				if Global.puzzle_running == false:
+					hud_alert.emit("Puzzles left to complete: " + str((5 - num_finished)))
 		elif tileset_coords in puzzle_coords and is_near_enough == false:
-			hud_alert.emit("Too far away")
+			if Global.puzzle_running == false:
+				hud_alert.emit("Too far away")
 
 # Looks for mouse clicks (releases, not presses)
 #func _unhandled_input(event):
@@ -133,3 +131,10 @@ func check_for_puzzle_click(sprite_pos):
 			#check_for_puzzle_click()
 			#print("left click (released)")
 			
+			
+func check_complete():
+	if num_finished >= 5:
+			#print("enough puzzles done")
+			lvl_finished = true
+			change_tile_set()
+			change_player_color.emit()

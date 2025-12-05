@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var hud = get_node("/root/Main/HUD")
 @onready var player = get_node("/root/Main/Player")
+@onready var mob = get_node("/root/Main/Mob")
 @onready var tileMap = get_node("/root/Main/allTiles")
 @onready var healthBar = get_node("/root/Main/HUD/InLevel/HealthBar")
 @onready var healthBarText = get_node("/root/Main/HUD/InLevel/HealthBar/HealthLabel")
@@ -12,7 +13,13 @@ var start_position = Vector2(4,2) * tile_cell_size
 
 var puzzle_active = false
 
-var r_minions = [Vector2(6,3)]
+var r_minions = [Vector2(6,3),Vector2(3,14),Vector2(14,5),Vector2(19,19)]
+var o_minions = [Vector2(5,7),Vector2(12,7),Vector2(19,13),Vector2(22,20)]
+var y_minions = [Vector2(8,3),Vector2(22,10),Vector2(23,20),Vector2(8,13)]
+var g_minions = [Vector2(9,2),Vector2(17,10),Vector2(23,20),Vector2(1,21)]
+var b_minions = [Vector2(4,6),Vector2(8,11),Vector2(21,7),Vector2(3,20)]
+var i_minions = [Vector2(4,13),Vector2(11,19),Vector2(11,5),Vector2(21,18)]
+var v_minions = [Vector2(3,6),Vector2(21,3),Vector2(16,11),Vector2(2,14)]
 
 func _ready():
 	Global.game_lvl = 1
@@ -30,11 +37,19 @@ func _unhandled_input(event):
 # This function is what will activate the puzzle minigames
 # INSERT PUZZLE ACTIVATION HERE.
 func activate_puzzle(tile_coords, tileset_coords):
-	print("Activated puzzle!", tile_coords, tileset_coords)
+	#print("Activated puzzle!", tile_coords, tileset_coords)
+	if Global.main_game_running:
+		if Global.puzzle_running == false:
+			$Puzzles.start_puzzle()
+			Global.puzzle_running = true
+		
+func complete_puzzle():
+	Global.puzzle_running = false
 	$allTiles.num_finished += 1 # This should only happen AFTER puzzle is completed
 	if $allTiles.num_finished < 5:
 		$HUD.hud_alert("Puzzles completed: " + str($allTiles.num_finished) + "/5")
 	else:
+		$allTiles.check_complete()
 		$HUD.hud_alert("You've restored a color!")
 
 func spawn_mob(pos):
@@ -71,7 +86,6 @@ func next_level():
 	
 	#resetting level variables
 	Global.player_death = false
-	#$Player/AnimatedSprite2D.play("idle_down")
 	$allTiles.lvl_finished = false
 	$allTiles.num_finished = 0
 	$allTiles.completed_puzzles = []
@@ -87,3 +101,4 @@ func end_game_cutscene():
 	
 func change_player_color():
 	$Player.change_color()
+	

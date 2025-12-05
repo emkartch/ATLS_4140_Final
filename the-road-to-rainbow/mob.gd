@@ -19,30 +19,30 @@ var slime_colors = [r_slimes, o_slimes, y_slimes, g_slimes, b_slimes, i_slimes, 
 
 var knockbackBool = false
 
+var track_color = 1
+
 func _ready():
 	#move.connect(player_velocity)
 	$AnimatedSprite2D.sprite_frames = slime_colors[Global.game_lvl - 1]
 	$AnimatedSprite2D.play("idle")
 
 func _physics_process(_delta: float) -> void:
-	#var is_visible = []
-	#var visible = camera.get_overlapping_areas()
-	#for area in visible:
-		#is_visible.append(area.name)
-	#if is_visible.has("Visible"):
-	#var rect: Rect2 = Rect2(to_global(camera.position), camera.size)
-	#if rect.has_point(position):
-		if knockbackBool == true:
-			var kb_direction = (Global.knockback - velocity).normalized() * 10000
-			velocity = kb_direction
-			velocity.y -= 250
-			move_and_slide()
-			knockbackBool = false
-		else:
-			var direction = global_position.direction_to(player.global_position)
-			velocity = direction * speed
-			move_and_slide()
-			animatedSprite.play("walk")
+
+	if track_color != Global.game_lvl:
+		change_color()
+		track_color += 1
+
+	if knockbackBool == true:
+		var kb_direction = (Global.knockback - velocity).normalized() * 10000
+		velocity = kb_direction
+		velocity.y -= 250
+		move_and_slide()
+		knockbackBool = false
+	else:
+		var direction = global_position.direction_to(player.global_position)
+		velocity = direction * speed
+		move_and_slide()
+		animatedSprite.play("walk")
 		
 	
 func mob_take_damage():
@@ -51,3 +51,6 @@ func mob_take_damage():
 	if health == 0:
 		
 		queue_free()
+
+func change_color():
+	$AnimatedSprite2D.sprite_frames = slime_colors[Global.game_lvl]

@@ -22,6 +22,7 @@
 size = Vector2(984, 984)
 
 [node name="SlidingPuzzle1Main" type="Area2D"]
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_r8kw7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
