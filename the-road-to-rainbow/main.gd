@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var hud = get_node("/root/Main/HUD")
 @onready var player = get_node("/root/Main/Player")
+@onready var mob = get_node("/root/Main/Mob")
 @onready var tileMap = get_node("/root/Main/allTiles")
 @onready var healthBar = get_node("/root/Main/HUD/InLevel/HealthBar")
 @onready var healthBarText = get_node("/root/Main/HUD/InLevel/HealthBar/HealthLabel")
@@ -78,7 +79,6 @@ func next_level():
 	
 	#resetting level variables
 	Global.player_death = false
-	#$Player/AnimatedSprite2D.play("idle_down")
 	$allTiles.lvl_finished = false
 	$allTiles.num_finished = 0
 	$allTiles.completed_puzzles = []
@@ -94,3 +94,4 @@ func end_game_cutscene():
 	
 func change_player_color():
 	$Player.change_color()
+	

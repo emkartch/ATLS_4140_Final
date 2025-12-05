@@ -33,7 +33,7 @@ func shuffle_tiles():
 	#print("shuffle issue")
 	var previous = 99
 	var previous_1 = 98
-	for t in range(0,100):
+	for t in range(0,1):
 		var tile = randi() % 16
 		if tiles[tile] != $Tile16 and tile != previous and tile != previous_1:
 			var rows = int((tiles[tile].position.y + 483) / ogW)
