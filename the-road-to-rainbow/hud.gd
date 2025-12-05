@@ -112,6 +112,7 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 		%HealthLabel.add_theme_font_size_override("font_size", 50)
 		$Alerts/AlertText.add_theme_font_size_override("font_size", 45)
 		%Controls.add_theme_font_size_override("normal_font_size", 36)
+		%Controls.add_theme_font_size_override("bold_font_size", 36)
 	elif not toggled_on:
 		theme.set_font_size("font_size", "Label", 60)
 		theme.set_font_size("font_size", "Button", 40)
@@ -121,6 +122,7 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 		%HealthLabel.add_theme_font_size_override("font_size", 30)
 		$Alerts/AlertText.add_theme_font_size_override("font_size", 36)
 		%Controls.add_theme_font_size_override("normal_font_size", 24)
+		%Controls.add_theme_font_size_override("bold_font_size", 24)
 		
 func hud_alert(code):
 	$Alerts/AlertText.text = code
