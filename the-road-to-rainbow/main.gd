@@ -30,7 +30,14 @@ func _unhandled_input(event):
 # This function is what will activate the puzzle minigames
 # INSERT PUZZLE ACTIVATION HERE.
 func activate_puzzle(tile_coords, tileset_coords):
-	print("Activated puzzle!", tile_coords, tileset_coords)
+	#print("Activated puzzle!", tile_coords, tileset_coords)
+	if Global.main_game_running:
+		if Global.puzzle_running == false:
+			$Puzzles.start_puzzle()
+			Global.puzzle_running = true
+		
+func complete_puzzle():
+	Global.puzzle_running = false
 	$allTiles.num_finished += 1 # This should only happen AFTER puzzle is completed
 	if $allTiles.num_finished < 5:
 		$HUD.hud_alert("Puzzles completed: " + str($allTiles.num_finished) + "/5")
