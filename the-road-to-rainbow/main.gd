@@ -84,6 +84,7 @@ func _on_player_health_depleted() -> void:
 func next_level():
 	if Global.game_lvl < 7:
 		Global.game_lvl += 1
+		$Player.reset_health()
 	else:
 		end_game_cutscene()
 	

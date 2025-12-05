@@ -91,3 +91,8 @@ func _on_punch_area_body_entered(body: Node2D) -> void:
 		
 func change_color():
 	$AnimatedSprite2D.sprite_frames = sprite_array[Global.game_lvl - 1]
+
+func reset_health():
+	health = 100.0
+	healthBar.value = health
+	healthBarText.text = str(int(health)) + "/" + str(int(Global.max_player_health))
