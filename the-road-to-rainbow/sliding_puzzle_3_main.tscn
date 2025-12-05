@@ -1,0 +1,108 @@
+[gd_scene load_steps=19 format=3 uid="uid://c17r2wxq80epd"]
+
+[ext_resource type="Script" uid="uid://lhdlgcx632c6" path="res://sliding_puzzle_3_main.gd" id="1_34fro"]
+[ext_resource type="Texture2D" uid="uid://b7g8051v6h7kc" path="res://images/Puzzle3_01.jpg" id="2_s5ei2"]
+[ext_resource type="Texture2D" uid="uid://s4t63c0ncpyx" path="res://images/Puzzle3_02.jpg" id="3_rxdew"]
+[ext_resource type="Texture2D" uid="uid://dtgitmegneetq" path="res://images/Puzzle3_03.jpg" id="4_ytiej"]
+[ext_resource type="Texture2D" uid="uid://c6yvcoem7wxhv" path="res://images/Puzzle3_04.jpg" id="5_nrg60"]
+[ext_resource type="Texture2D" uid="uid://bheyw2ki4ic0u" path="res://images/Puzzle3_05.jpg" id="6_2wm7r"]
+[ext_resource type="Texture2D" uid="uid://bw7xito1c3siq" path="res://images/Puzzle3_06.jpg" id="7_bvx6m"]
+[ext_resource type="Texture2D" uid="uid://krfjqbkphg66" path="res://images/Puzzle3_07.jpg" id="8_bm3rq"]
+[ext_resource type="Texture2D" uid="uid://bybtsaasavdgl" path="res://images/Puzzle3_08.jpg" id="9_tputp"]
+[ext_resource type="Texture2D" uid="uid://b7rrtawi1q2mu" path="res://images/Puzzle3_09.jpg" id="10_4xt30"]
+[ext_resource type="Texture2D" uid="uid://xt4w5va75kv1" path="res://images/Puzzle3_10.jpg" id="11_cem1a"]
+[ext_resource type="Texture2D" uid="uid://7gxb0hqfex0l" path="res://images/Puzzle3_11.jpg" id="12_grvhj"]
+[ext_resource type="Texture2D" uid="uid://en3vh1cdppsy" path="res://images/Puzzle3_12.jpg" id="13_kgru7"]
+[ext_resource type="Texture2D" uid="uid://4niskbvp5xk6" path="res://images/Puzzle3_13.jpg" id="14_u8x6x"]
+[ext_resource type="Texture2D" uid="uid://b4jymu5ya4yq4" path="res://images/Puzzle3_14.jpg" id="15_p8vm4"]
+[ext_resource type="Texture2D" uid="uid://btu4vhc57btqt" path="res://images/Puzzle3_15.jpg" id="16_8w4sy"]
+[ext_resource type="Texture2D" uid="uid://cyqdebg3vx6w5" path="res://images/Puzzle3Grey.jpg" id="17_uunhj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfcyt"]
+size = Vector2(984, 984)
+
+[node name="SlidingPuzzle3Main" type="Area2D"]
+script = ExtResource("1_34fro")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yfcyt")
+
+[node name="Tile1" type="Sprite2D" parent="."]
+position = Vector2(-369, -360)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("2_s5ei2")
+
+[node name="Tile2" type="Sprite2D" parent="."]
+position = Vector2(-123, -360)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("3_rxdew")
+
+[node name="Tile3" type="Sprite2D" parent="."]
+position = Vector2(123, -360)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("4_ytiej")
+
+[node name="Tile4" type="Sprite2D" parent="."]
+position = Vector2(369, -360)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("5_nrg60")
+
+[node name="Tile5" type="Sprite2D" parent="."]
+position = Vector2(-369, -114)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("6_2wm7r")
+
+[node name="Tile6" type="Sprite2D" parent="."]
+position = Vector2(-123, -114)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("7_bvx6m")
+
+[node name="Tile7" type="Sprite2D" parent="."]
+position = Vector2(123, -114)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("8_bm3rq")
+
+[node name="Tile8" type="Sprite2D" parent="."]
+position = Vector2(369, -114)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("9_tputp")
+
+[node name="Tile9" type="Sprite2D" parent="."]
+position = Vector2(-369, 132)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("10_4xt30")
+
+[node name="Tile10" type="Sprite2D" parent="."]
+position = Vector2(-123, 132)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("11_cem1a")
+
+[node name="Tile11" type="Sprite2D" parent="."]
+position = Vector2(123, 132)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("12_grvhj")
+
+[node name="Tile12" type="Sprite2D" parent="."]
+position = Vector2(369, 132)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("13_kgru7")
+
+[node name="Tile13" type="Sprite2D" parent="."]
+position = Vector2(-369, 378)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("14_u8x6x")
+
+[node name="Tile14" type="Sprite2D" parent="."]
+position = Vector2(-123, 378)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("15_p8vm4")
+
+[node name="Tile15" type="Sprite2D" parent="."]
+position = Vector2(123, 378)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("16_8w4sy")
+
+[node name="Tile16" type="Sprite2D" parent="."]
+position = Vector2(369, 378)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("17_uunhj")
