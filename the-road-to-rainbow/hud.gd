@@ -77,7 +77,11 @@ func _on_start_button_pressed() -> void:
 	call_deferred("level_start")
 
 func level_start():
-	start_game.emit()
+	
+	if Global.opening_cutscene == false:
+		run_opening_cards()
+	else:
+		start_game.emit()
 
 func _on_message_timer_timeout() -> void:
 	$TitleContainer.hide()
@@ -133,4 +137,55 @@ func hud_alert(code):
 	await $Alerts/Timer.timeout
 	#print("timed out")
 	$Alerts.hide()
+	
+func run_opening_cards():
+	$BackgroundMusic.play()
+	
+	$Cards/Open1.show()
+	$Cards/Open2.hide()
+	$Cards/Open3.hide()
+	$Cards/Open4.hide()
+	$Cards/Close1.hide()
+	$Cards/Close2.hide()
+	
+	$Cards.show()
+	
+	$Cards/Timer.start()
+	await $Cards/Timer.timeout
+	$Cards/Open2.show()
+	$Cards/Open1.hide()
+	
+	$Cards/Timer.start()
+	await $Cards/Timer.timeout
+	$Cards/Open3.show()
+	$Cards/Open2.hide()
+	
+	$Cards/Timer.start()
+	await $Cards/Timer.timeout
+	$Cards/Open4.show()
+	$Cards/Open3.hide()
+	
+	$Cards/Timer.start()
+	await $Cards/Timer.timeout
+	$Cards.hide()
+	Global.opening_cutscene = true
+	start_game.emit()
+	
+func run_end_cards():
+	$BackgroundMusic.stop()
+	$EndMusic.play()
+	
+	$Cards/Open1.hide()
+	$Cards/Open2.hide()
+	$Cards/Open3.hide()
+	$Cards/Open4.hide()
+	$Cards/Close1.show()
+	$Cards/Close2.hide()
+	
+	$Cards.show()
+	
+	$Cards/Timer.start()
+	await $Cards/Timer.timeout
+	$Cards/Close2.show()
+	$Cards/Close1.hide()
 	

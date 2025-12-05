@@ -2,6 +2,7 @@ extends TileMapLayer
 signal activate_puzzle(tile_coords, tileset_coords)
 signal level_up
 signal hud_alert(alert_code)
+signal change_player_color()
 
 # for tracking where we are at
 #var lvl = 1
@@ -114,6 +115,7 @@ func check_for_puzzle_click(sprite_pos):
 			if num_finished >= 5:
 				lvl_finished = true
 				change_tile_set()
+				change_player_color.emit()
 		#Checking if the player has clicked the finish puzzle tile after completing all puzzles
 		elif tileset_coords in finish_coords and is_near_2:
 			if num_finished >= 5:

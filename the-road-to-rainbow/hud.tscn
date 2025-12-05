@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ds8aae77ps3fc"]
+[gd_scene load_steps=29 format=3 uid="uid://ds8aae77ps3fc"]
 
 [ext_resource type="Script" uid="uid://bw3olh0ub4d0c" path="res://hud.gd" id="1_64ctp"]
 [ext_resource type="FontFile" uid="uid://b5bspum6ffekd" path="res://fonts/SourceCodePro-Bold.ttf" id="2_8sq4i"]
@@ -7,6 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://b5uoqn2mwnf81" path="res://rainbow_hud/rainbow_0.png" id="3_8sq4i"]
 [ext_resource type="Theme" uid="uid://cmjabatqf4rvy" path="res://theme/trtr_theme.tres" id="3_640wx"]
 [ext_resource type="Texture2D" uid="uid://cjmfssectndfo" path="res://theme/settings_icon.png" id="4_a2258"]
+[ext_resource type="Texture2D" uid="uid://blqn1cjjexl0d" path="res://cutscenes/Open1.png" id="8_61f8s"]
+[ext_resource type="Texture2D" uid="uid://bvkujl3ix5cib" path="res://cutscenes/Open2.png" id="9_4u2vk"]
+[ext_resource type="Texture2D" uid="uid://dib4c8c73a8c2" path="res://cutscenes/Open3.png" id="10_4q17s"]
+[ext_resource type="Texture2D" uid="uid://bwp2n8iqlysxf" path="res://cutscenes/Open4.png" id="11_2d608"]
+[ext_resource type="Texture2D" uid="uid://b63y4slt4n8t1" path="res://cutscenes/Close1.png" id="12_w71nf"]
+[ext_resource type="Texture2D" uid="uid://bd0n2nlvctjvy" path="res://cutscenes/Close2.png" id="13_615i1"]
+[ext_resource type="AudioStream" uid="uid://pijdr3p8grq" path="res://sounds/Moonshadow.mp3" id="14_2d608"]
+[ext_resource type="AudioStream" uid="uid://dogvyxyddh7ul" path="res://sounds/Eldertide.mp3" id="15_2d608"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sq4i"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -316,6 +324,54 @@ vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="Alerts"]
 wait_time = 2.0
+
+[node name="Cards" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Open1" type="TextureRect" parent="Cards"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("8_61f8s")
+stretch_mode = 4
+
+[node name="Open2" type="TextureRect" parent="Cards"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("9_4u2vk")
+stretch_mode = 4
+
+[node name="Open3" type="TextureRect" parent="Cards"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("10_4q17s")
+stretch_mode = 4
+
+[node name="Open4" type="TextureRect" parent="Cards"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("11_2d608")
+stretch_mode = 4
+
+[node name="Close1" type="TextureRect" parent="Cards"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("12_w71nf")
+stretch_mode = 4
+
+[node name="Close2" type="TextureRect" parent="Cards"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("13_615i1")
+stretch_mode = 4
+
+[node name="Timer" type="Timer" parent="Cards"]
+wait_time = 10.0
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_2d608")
+
+[node name="EndMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_2d608")
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
 [connection signal="pressed" from="TitleButtonsContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
