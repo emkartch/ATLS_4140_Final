@@ -112,11 +112,6 @@ func check_for_puzzle_click(sprite_pos):
 				if Global.puzzle_running == false:
 					hud_alert.emit("Puzzle already completed")
 				#print(completed_puzzles)
-			
-			if num_finished >= 5:
-				lvl_finished = true
-				change_tile_set()
-				change_player_color.emit()
 		#Checking if the player has clicked the finish puzzle tile after completing all puzzles
 		elif tileset_coords in finish_coords and is_near_2:
 			if num_finished >= 5:
@@ -136,3 +131,10 @@ func check_for_puzzle_click(sprite_pos):
 			#check_for_puzzle_click()
 			#print("left click (released)")
 			
+			
+func check_complete():
+	if num_finished >= 5:
+			#print("enough puzzles done")
+			lvl_finished = true
+			change_tile_set()
+			change_player_color.emit()

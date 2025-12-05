@@ -43,6 +43,7 @@ func complete_puzzle():
 	if $allTiles.num_finished < 5:
 		$HUD.hud_alert("Puzzles completed: " + str($allTiles.num_finished) + "/5")
 	else:
+		$allTiles.check_complete()
 		$HUD.hud_alert("You've restored a color!")
 
 func spawn_mob(pos):
