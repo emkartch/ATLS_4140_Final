@@ -192,3 +192,8 @@ func run_end_cards():
 	$Cards/Close2.show()
 	$Cards/Close1.hide()
 	
+func set_puzzle_difficulty(toggled_on: bool) -> void:
+	if toggled_on:
+		Global.puzzle_difficulty = 25
+	elif not toggled_on:
+		Global.puzzle_difficulty = 50

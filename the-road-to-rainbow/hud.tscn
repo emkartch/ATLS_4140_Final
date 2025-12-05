@@ -260,6 +260,18 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="EasyCheck" type="CheckButton" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+shortcut = SubResource("Shortcut_gpiub")
+text = "Easier Puzzles"
+alignment = 1
+
+[node name="Spacer3" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="Controls" type="RichTextLabel" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -273,11 +285,6 @@ text = "[b]Controls:[/b]
 [b]Run:[/b] Shift + arrows/WASD
 [b]Activate puzzle:[/b] click on the puzzle"
 fit_content = true
-
-[node name="Spacer3" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
 
 [node name="Spacer4" type="Control" parent="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer"]
 visible = false
@@ -327,6 +334,7 @@ wait_time = 2.0
 
 [node name="Cards" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 
 [node name="Open1" type="TextureRect" parent="Cards"]
 offset_right = 1920.0
@@ -379,3 +387,4 @@ stream = ExtResource("15_2d608")
 [connection signal="pressed" from="InLevel/SettingsIconButton" to="." method="_on_settings_icon_button_pressed"]
 [connection signal="pressed" from="Settings/ReturnIcon" to="." method="_on_return_icon_pressed"]
 [connection signal="toggled" from="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="toggled" from="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer/EasyCheck" to="." method="set_puzzle_difficulty"]
