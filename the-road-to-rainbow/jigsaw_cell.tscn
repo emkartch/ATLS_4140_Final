@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbtogpi2xxi25"]
+
+[ext_resource type="Script" uid="uid://3ef3xohy0fhx" path="res://jigsaw_cell.gd" id="1_ed3qh"]
+
+[sub_resource type="Gradient" id="Gradient_2fsfa"]
+offsets = PackedFloat32Array(0, 0.055)
+colors = PackedColorArray(0, 0, 0, 1, 0.236388, 0.26867, 0.351968, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w8q4y"]
+gradient = SubResource("Gradient_2fsfa")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_243gs"]
+
+[node name="JigsawCell" type="Area2D" groups=["cell"]]
+script = ExtResource("1_ed3qh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture1D_w8q4y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_243gs")
