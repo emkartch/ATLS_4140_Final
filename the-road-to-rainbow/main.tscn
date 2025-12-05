@@ -27,5 +27,6 @@ unique_name_in_owner = true
 [node name="HUD" parent="." instance=ExtResource("4_1bvp3")]
 
 [connection signal="activate_puzzle" from="allTiles" to="." method="activate_puzzle"]
+[connection signal="level_up" from="allTiles" to="." method="next_level"]
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]

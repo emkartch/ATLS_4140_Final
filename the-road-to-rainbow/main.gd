@@ -15,7 +15,7 @@ var puzzle_active = false
 var r_minions = [Vector2(6,3)]
 
 func _ready():
-	Global.game_lvl = 7
+	Global.game_lvl = 1
 	$allTiles.change_tile_set()
 
 func _unhandled_input(event):
@@ -25,9 +25,12 @@ func _unhandled_input(event):
 				#print("worked")
 				$allTiles.check_for_puzzle_click($Player.position)
 				
+
 # This function is what will activate the puzzle minigames
+# INSERT PUZZLE ACTIVATION HERE.
 func activate_puzzle(tile_coords, tileset_coords):
 	print("Activated puzzle!", tile_coords, tileset_coords)
+	$allTiles.num_finished += 1 # This should only happen AFTER puzzle is completed
 
 func spawn_mob(pos):
 	%PathFollow2D.progress_ratio = randf()
@@ -54,3 +57,20 @@ func _on_hud_start_game() -> void:
 func _on_player_health_depleted() -> void:
 	Global.main_game_running = false
 	Global.player_death = true
+
+func next_level():
+	if Global.game_lvl < 7:
+		Global.game_lvl += 1
+	else:
+		end_game_cutscene()
+	
+	#resetting level variables
+	$allTiles.lvl_finished = false
+	$allTiles.num_finished = 0
+	$allTiles.completed_puzzles = []
+	$allTiles.change_tile_set()
+	$Player.position = start_position
+
+# ADD: music and a "yay you did it" here
+func end_game_cutscene():
+	pass;

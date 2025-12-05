@@ -15,11 +15,13 @@ var b_slimes: SpriteFrames = preload("res://mobs/sprites/blue_slime.tres")
 var i_slimes: SpriteFrames = preload("res://mobs/sprites/indigo_slime.tres")
 var v_slimes: SpriteFrames = preload("res://mobs/sprites/violet_slime.tres")
 
+var slime_colors = [r_slimes, o_slimes, y_slimes, g_slimes, b_slimes, i_slimes, v_slimes]
+
 var knockbackBool = false
 
 func _ready():
 	#move.connect(player_velocity)
-	$AnimatedSprite2D.sprite_frames = r_slimes
+	$AnimatedSprite2D.sprite_frames = slime_colors[Global.game_lvl - 1]
 	$AnimatedSprite2D.play("idle")
 
 func _physics_process(_delta: float) -> void:

@@ -1,5 +1,6 @@
 extends TileMapLayer
 signal activate_puzzle(tile_coords, tileset_coords)
+signal level_up
 
 # for tracking where we are at
 #var lvl = 1
@@ -13,8 +14,12 @@ var lvl_puzz = []
 var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow", "Grey-Green", "Grey-Blue", "Grey-Indigo", "Grey-Violet"]
 var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow", "Color-Green", "Color-Blue", "Color-Indigo", "Color-Violet"]
 var puzzle_coords = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
+var finish_coords = [Vector2i(4,3)]
+var completed_puzzles = []
 
 func _ready():
+	num_finished = 0
+	
 	#print(Global.game_lvl)
 	lvl_tiles = [$Red, $Orange, $Yellow, $Green, $Blue, $Indigo, $Violet]
 	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls, $Blue/Walls, $Indigo/Walls, $Violet/Walls]
@@ -24,7 +29,7 @@ func _ready():
 func set_collisions():
 	for i in range(0,7):
 	
-		print(lvl_tiles[i])
+		#print(lvl_tiles[i])
 		
 		if Global.game_lvl - 1 == i:
 			lvl_tiles[i].show()
@@ -45,6 +50,16 @@ func change_tile_set():
 	else:
 		newTexture = load("res://tilesets/" + filenames_true[Global.game_lvl - 1] + ".png")
 	
+	if Global.game_lvl == 7:
+		#$Violet/SkyLayer.show()
+		if lvl_finished == false:
+			$Violet/SkyLayer/Sky.texture = load("res://tilesets/Grey-Violet-Background.png")
+		else:
+			$Violet/SkyLayer/Sky.texture = load("res://tilesets/Color-Violet-Background.png")
+	else:
+		#$Violet/SkyLayer.hide()
+		pass;
+	
 	if Global.game_lvl == 4:
 		lvl_walls[Global.game_lvl - 1].tile_set.get_source(1).texture = newTexture
 	else:
@@ -53,26 +68,6 @@ func change_tile_set():
 	# I made a weird other tileset for this specific one, it's annoying
 	if Global.game_lvl == 1:
 		$Red/AccPuzz.tile_set.get_source(1).texture = newTexture
-	
-	# This is all old code, IGNORE THIS
-	#if lvl == 1 and lvl_finished == false:
-		#var nnewTexture = load("res://tilesets/RedTilesGrey.png")
-		#$Red/Ground.tile_set.get_source(0).texture = newTexture
-		#$Red/AccPuzz.tile_set.get_source(1).texture = newTexture
-	#elif lvl == 1 and lvl_finished == true:
-		#var nnewTexture = load("res://tilesets/OnlyRed-Lvl1.png")
-		#$Red/Ground.tile_set.get_source(0).texture = newTexture
-		#$Red/AccPuzz.tile_set.get_source(1).texture = newTexture
-	#elif lvl == 2 and lvl_finished == false:
-		#var nnewTexture = load("res://tilesets/Greyed-Orange.png")
-		#$Orange/Ground.tile_set.get_source(0).texture = newTexture
-	#elif lvl == 2 and lvl_finished == true:
-		#var nnewTexture = load("res://tilesets/Only-Orange.png")
-		#$Orange/Ground.tile_set.get_source(0).texture = newTexture
-	#elif lvl == 2 and lvl_finished == true:
-		#var nnewTexture = load("res://tilesets/Only-Orange.png")
-		#$Orange/Ground.tile_set.get_source(0).texture = newTexture
-		#
 		
 	# setting show and collisions
 	set_collisions()
@@ -88,28 +83,38 @@ func check_for_puzzle_click(sprite_pos):
 	var tile_map_coords = lvl_puzz[Global.game_lvl - 1].map_to_local(tile_pos)
 	# Where is the tile in the tileset?
 	var tileset_coords = lvl_puzz[Global.game_lvl - 1].get_cell_atlas_coords(tile_pos)
-	print(tileset_coords)
+	#print(tileset_coords)
 	
 	if tileset_coords!= Vector2i(-1,-1):
 		
 		# How far away is the player from the clicked tile?
 		var pos_delta = tile_map_coords - sprite_pos
-		#print("Delta:", pos_delta)
+		print("Delta:", pos_delta)
 		
 		# Is the player near enough to the tile?
 		var is_near_enough = false
+		var is_near_2 = false
 		if abs(pos_delta[0]) <= 140 and abs(pos_delta[1]) <= 100:
 			is_near_enough = true
+		
+		if abs(pos_delta[0]) <= 160 and abs(pos_delta[1]) < 180:
+			is_near_2 = true
 			
 		#print(tileset_coords)
 		if tileset_coords in puzzle_coords and is_near_enough:
-			print("activate puzzle")
-			activate_puzzle.emit(tile_map_coords, tileset_coords)
-			num_finished += 1
-	
-	if num_finished >= 5:
-		lvl_finished = true
-		change_tile_set()
+			#print("activate puzzle")
+			if tile_map_coords not in completed_puzzles:
+				activate_puzzle.emit(tile_map_coords, tileset_coords)
+				completed_puzzles.append(tile_map_coords)
+				#print(completed_puzzles)
+			
+			if num_finished >= 5:
+				lvl_finished = true
+				change_tile_set()
+		#Checking if the player has clicked the finish puzzle tile after completing all puzzles
+		elif tileset_coords in finish_coords and is_near_2:
+			if num_finished >= 5:
+				level_up.emit()
 
 # Looks for mouse clicks (releases, not presses)
 #func _unhandled_input(event):

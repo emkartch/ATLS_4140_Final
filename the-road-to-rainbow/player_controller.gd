@@ -29,6 +29,8 @@ func _process(delta):
 		
 		var velocity1 = Vector2.ZERO # The player's movement vector.
 		#if !Global.wound_animation:
+		if Input.is_anything_pressed() == false:
+			velocity1 = Vector2(0,0)
 		if Input.is_action_pressed("player_right"):
 			velocity1.x += 1
 			Global.cur_direction = "right"
@@ -49,9 +51,9 @@ func _process(delta):
 		else:
 			Global.player_move = false
 		
-		position += velocity1 * delta
+		#position += velocity1 * delta
 
-		move_and_slide()
+		move_and_collide(velocity1 * delta)
 		#move_and_collide(position)
 	
 	#if Input.is_action_just_pressed("input_test"):
