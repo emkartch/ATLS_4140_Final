@@ -18,7 +18,7 @@ func _ready():
 
 func start_puzzle():
 	$Background.show()
-	$Reset.show()
+	#$Reset.show()
 	curr_puzzle = puzz_array.pick_random()
 	#curr_puzzle = $SlidingPuzzle1Main
 	
