@@ -22,7 +22,7 @@ func _ready():
 	$AnimatedSprite2D.sprite_frames = r_slimes
 	$AnimatedSprite2D.play("idle")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#var is_visible = []
 	#var visible = camera.get_overlapping_areas()
 	#for area in visible:

@@ -10,20 +10,19 @@ var num_finished = 0
 var lvl_tiles = []
 var lvl_walls = []
 var lvl_puzz = []
-var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow", "Grey-Green", "Grey-Blue", "Grey-Indigo"]
-var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow", "Color-Green", "Color-Blue", "Color-Indigo"]
+var filenames_false = ["RedTilesGrey", "Greyed-Orange", "Grey-Yellow", "Grey-Green", "Grey-Blue", "Grey-Indigo", "Grey-Violet"]
+var filenames_true = ["OnlyRed-Lvl1", "Only-Orange", "Color-Yellow", "Color-Green", "Color-Blue", "Color-Indigo", "Color-Violet"]
 var puzzle_coords = [Vector2i(2, 4), Vector2i(3, 4), Vector2i(4, 4)]
 
 func _ready():
-	lvl_tiles = [$Red, $Orange, $Yellow, $Green, $Blue, $Indigo]
-	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls, $Blue/Walls, $Indigo/Walls]
-	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz, $Blue/AccPuzz, $Indigo/AccPuzz]
-
-	change_tile_set()
+	#print(Global.game_lvl)
+	lvl_tiles = [$Red, $Orange, $Yellow, $Green, $Blue, $Indigo, $Violet]
+	lvl_walls = [$Red/Walls, $Orange/Walls, $Yellow/Walls, $Green/Walls, $Blue/Walls, $Indigo/Walls, $Violet/Walls]
+	lvl_puzz = [$Red/AccPuzz, $Orange/AccPuzz, $Yellow/AccPuzz, $Green/AccPuzz, $Blue/AccPuzz, $Indigo/AccPuzz, $Violet/AccPuzz]
 
 # Setting show and collisions per tile
 func set_collisions():
-	for i in range(0,6):
+	for i in range(0,7):
 	
 		print(lvl_tiles[i])
 		
@@ -104,7 +103,7 @@ func check_for_puzzle_click(sprite_pos):
 			
 		#print(tileset_coords)
 		if tileset_coords in puzzle_coords and is_near_enough:
-			#print("activate puzzle")
+			print("activate puzzle")
 			activate_puzzle.emit(tile_map_coords, tileset_coords)
 			num_finished += 1
 	

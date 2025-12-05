@@ -25,6 +25,8 @@ func _ready():
 	
 func _process(delta):
 	if Global.main_game_running:
+		#print(InputMap.has_action("player_right"))
+		
 		var velocity1 = Vector2.ZERO # The player's movement vector.
 		#if !Global.wound_animation:
 		if Input.is_action_pressed("player_right"):
@@ -42,7 +44,7 @@ func _process(delta):
 
 		if velocity1.length() > 0:
 			velocity1 = velocity1.normalized() * Global.player_speed
-			print(velocity1)
+			#print(velocity1)
 			Global.player_move = true
 		else:
 			Global.player_move = false

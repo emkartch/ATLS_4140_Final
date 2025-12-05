@@ -14,6 +14,10 @@ var puzzle_active = false
 
 var r_minions = [Vector2(6,3)]
 
+func _ready():
+	Global.game_lvl = 7
+	$allTiles.change_tile_set()
+
 func _unhandled_input(event):
 	if !puzzle_active:
 		if event is InputEventMouseButton:
@@ -25,17 +29,17 @@ func _unhandled_input(event):
 func activate_puzzle(tile_coords, tileset_coords):
 	print("Activated puzzle!", tile_coords, tileset_coords)
 
-func spawn_mob(position):
+func spawn_mob(pos):
 	%PathFollow2D.progress_ratio = randf()
 	var new_mob = preload("res://mob.tscn").instantiate()
 	new_mob.global_position = %PathFollow2D.global_position
-	new_mob.position = position
+	new_mob.position = pos
 	add_child(new_mob)
 
 func _on_hud_start_game() -> void:
 	healthBar.value = Global.max_player_health
 	healthBarText.text = str(int(player.health)) + "/" + str(int(Global.max_player_health))
-	Global.game_lvl = 1
+	# Global.game_lvl = 1
 	player.position = start_position
 	player.show()
 	tileMap.show()
