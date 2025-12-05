@@ -78,8 +78,8 @@ func _on_hud_start_game() -> void:
 
 
 func _on_player_health_depleted() -> void:
-	Global.main_game_running = false
 	Global.player_death = true
+
 
 func next_level():
 	if Global.game_lvl < 7:

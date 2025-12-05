@@ -7,6 +7,7 @@ signal start_game
 @onready var theme = preload("res://theme/trtr_theme.tres")
 @onready var tileMap = get_node("/root/Main/allTiles")
 @onready var player = get_node("/root/Main/Player")
+@onready var animatedSprite = get_node("/root/Main/Player/AnimatedSprite2D")
 
 func _ready():
 	$InLevel.hide()
@@ -35,12 +36,13 @@ func show_game_over():
 	show_message("Game Over")
 	# Wait until the MessageTimer has counted down.
 	await $MessageTimer.timeout
+	get_tree().quit()
 
-	%TitleLabel.text = "The Road to\nRainbow"
-	$TitleContainer.show()
-	# Make a one-shot timer and wait for it to finish.
-	await get_tree().create_timer(1.0).timeout
-	$TitleButtonsContainer.show()
+	#%TitleLabel.text = "The Road to\nRainbow"
+	#$TitleContainer.show()
+	## Make a one-shot timer and wait for it to finish.
+	#await get_tree().create_timer(1.0).timeout
+	#$TitleButtonsContainer.show()
 	
 func show_win():
 	$InLevel.hide()
@@ -55,12 +57,13 @@ func show_win():
 	
 	# Wait until the MessageTimer has counted down.
 	await $MessageTimer.timeout
+	get_tree().quit()
 
-	%TitleLabel.text = "The Road to\nRainbow"
-	$TitleContainer.show()
-	# Make a one-shot timer and wait for it to finish.
-	await get_tree().create_timer(1.0).timeout
-	$TitleButtonsContainer.show()
+	#%TitleLabel.text = "The Road to\nRainbow"
+	#$TitleContainer.show()
+	## Make a one-shot timer and wait for it to finish.
+	#await get_tree().create_timer(1.0).timeout
+	#$TitleButtonsContainer.show()
 
 func show_message(text):
 	%TitleLabel.text = text
