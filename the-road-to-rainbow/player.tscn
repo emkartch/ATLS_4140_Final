@@ -23,6 +23,8 @@ size = Vector2(24.75, 14)
 size = Vector2(26, 15.25)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 scale = Vector2(4, 4)
 script = ExtResource("1_o6g0v")
 
