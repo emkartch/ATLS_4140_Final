@@ -9,6 +9,7 @@ var tileW = 246 * 0.7
 var ogW = 246
 var top = 195.6
 var left = 615.6
+var playing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,10 +17,13 @@ func _ready():
 	pass;
 
 func start_game():
+	playing = false
 	tiles = [$Tile1, $Tile2, $Tile3, $Tile4, $Tile5, $Tile6, $Tile7, $Tile8, $Tile9, $Tile10, $Tile11, $Tile12, $Tile13, $Tile14, $Tile15, $Tile16 ]
 	solved = tiles.duplicate()
 	shuffle_tiles()
 	show()
+	
+	playing = true
 	
 	for i in tiles:
 		i.show()
@@ -44,7 +48,7 @@ func shuffle_tiles():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	#print("process issue")
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and mouse:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and mouse and playing:
 		var mouse_copy = mouse
 		#print(mouse.position)
 		mouse = false
@@ -54,8 +58,10 @@ func _process(_delta):
 		#print(str(rows) + "," + str(cols))
 		check_neighbours(rows,cols)
 		if tiles == solved:
+			print(tiles)
 			print("Puzzle Complete!")
 			completed.emit()
+			playing = false
 
 func check_neighbours(rows, cols):
 	var empty = false
@@ -88,7 +94,7 @@ func find_empty(position2,pos):
 	var new_rows = int((position2.y + 483) / ogW)
 	var new_cols = int((position2.x + 492) / ogW)
 	var new_pos = new_rows * 4 + new_cols
-	#print(str(new_rows) + "," + str(new_cols))
+	print(str(new_rows) + "," + str(new_cols))
 	#print(str(new_pos) + "new tile index")
 	#print(str(new_pos) + "new position")
 	if tiles[new_pos] == $Tile16:

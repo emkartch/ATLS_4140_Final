@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1ox71ir72lm"]
+[gd_scene load_steps=7 format=3 uid="uid://b1ox71ir72lm"]
 
 [ext_resource type="Script" uid="uid://cwb7ioa8h08n2" path="res://puzzles.gd" id="1_aahxs"]
 [ext_resource type="PackedScene" uid="uid://btb8twisisaqb" path="res://sliding_puzzle_1_main.tscn" id="1_fa1cb"]
 [ext_resource type="PackedScene" uid="uid://dwv55a4bxepbv" path="res://sliding_puzzle_2_main.tscn" id="2_aahxs"]
 [ext_resource type="PackedScene" uid="uid://c17r2wxq80epd" path="res://sliding_puzzle_3_main.tscn" id="3_e03ss"]
 [ext_resource type="Texture2D" uid="uid://co0lbw5jx00eh" path="res://images/Puzzles.png" id="5_e03ss"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e03ss"]
+bg_color = Color(0.138445, 0.19376, 0.215339, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="Puzzles" type="CanvasLayer"]
 script = ExtResource("1_aahxs")
@@ -39,6 +46,17 @@ visible = false
 position = Vector2(960, 540)
 scale = Vector2(0.7, 0.7)
 
+[node name="Reset" type="Button" parent="."]
+offset_left = 318.0
+offset_top = 493.0
+offset_right = 594.0
+offset_bottom = 593.0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = SubResource("StyleBoxFlat_e03ss")
+theme_override_styles/normal = SubResource("StyleBoxFlat_e03ss")
+text = "Reset Puzzle"
+
 [connection signal="completed" from="SlidingPuzzle1Main" to="." method="on_completed"]
 [connection signal="completed" from="SlidingPuzzle2Main" to="." method="on_completed"]
 [connection signal="completed" from="SlidingPuzzle3Main" to="." method="on_completed"]
+[connection signal="button_up" from="Reset" to="." method="reset_puzzle"]
