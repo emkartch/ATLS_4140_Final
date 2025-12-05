@@ -7,9 +7,10 @@ extends Node2D
 @onready var healthBar = get_node("/root/Main/HUD/InLevel/HealthBar")
 @onready var healthBarText = get_node("/root/Main/HUD/InLevel/HealthBar/HealthLabel")
 
-var tile_cell_size = Vector2(144,144)
+var tile_cell_size_start = Vector2(144,144)
+var tile_cell_size = Vector2(128,128)
 
-var start_position = Vector2(4,2) * tile_cell_size
+var start_position = Vector2(4,2) * tile_cell_size_start
 
 var puzzle_active = false
 
@@ -20,6 +21,8 @@ var g_minions = [Vector2(9,2),Vector2(17,10),Vector2(23,20),Vector2(1,21)]
 var b_minions = [Vector2(4,6),Vector2(8,11),Vector2(21,7),Vector2(3,20)]
 var i_minions = [Vector2(4,13),Vector2(11,19),Vector2(11,5),Vector2(21,18)]
 var v_minions = [Vector2(3,6),Vector2(21,3),Vector2(16,11),Vector2(2,14)]
+
+var minion_array = [r_minions,o_minions,y_minions,g_minions,b_minions,i_minions,v_minions]
 
 func _ready():
 	Global.game_lvl = 1
@@ -68,7 +71,7 @@ func _on_hud_start_game() -> void:
 	tileMap.show()
 
 	for vector in r_minions:
-		var location = vector * tile_cell_size
+		var location = vector * tile_cell_size_start
 		spawn_mob(location)
 		
 	Global.main_game_running = true
@@ -91,6 +94,10 @@ func next_level():
 	$allTiles.completed_puzzles = []
 	$allTiles.change_tile_set()
 	$Player.position = start_position
+	
+	for vector in minion_array[Global.game_lvl - 1]:
+		var location = vector * tile_cell_size
+		spawn_mob(location)
 	
 func hud_alert(code):
 	$HUD.hud_alert(code)
