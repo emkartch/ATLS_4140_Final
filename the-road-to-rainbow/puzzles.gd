@@ -3,11 +3,12 @@ extends CanvasLayer
 signal puzzle_completed
 
 var puzz_array = []
+var short_puzz_array = []
 var curr_puzzle
 
 func _ready():
-	puzz_array = [$SlidingPuzzle1Main, $SlidingPuzzle2Main, $SlidingPuzzle3Main]
-	#puzz_array = [$SlidingPuzzle1Main]
+	puzz_array = [$SlidingPuzzle1Main, $SlidingPuzzle2Main, $SlidingPuzzle3Main, $Slide4, $Slide5]
+	short_puzz_array = [$Slide4, $Slide5]
 	for i in puzz_array:
 		i.hide()
 		
@@ -19,7 +20,7 @@ func _ready():
 func start_puzzle():
 	$Background.show()
 	#$Reset.show()
-	curr_puzzle = puzz_array.pick_random()
+	curr_puzzle = short_puzz_array.pick_random()
 	#curr_puzzle = $SlidingPuzzle1Main
 	
 	#print("puzzle worked")
