@@ -13,13 +13,13 @@ func _ready():
 		i.hide()
 		
 	$Background.hide()
-	$Reset.hide()
+	$Exit.hide()
 	
 	#$SlidingPuzzle3Main.start_game()
 
 func start_puzzle():
 	$Background.show()
-	#$Reset.show()
+	#$Exit.show()
 	curr_puzzle = puzz_array.pick_random()
 	#curr_puzzle = $SlidingPuzzle1Main
 	
@@ -35,7 +35,7 @@ func on_completed():
 	curr_puzzle.hide()
 	curr_puzzle = -1
 	puzzle_completed.emit()
-	$Reset.hide()
+	$Exit.hide()
 	
 func reset_puzzle():
 	if curr_puzzle in puzz_array:

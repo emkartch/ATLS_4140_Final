@@ -98,7 +98,7 @@ visible = false
 position = Vector2(960, 540)
 scale = Vector2(0.7, 0.7)
 
-[node name="Reset" type="Button" parent="."]
+[node name="Exit" type="Button" parent="."]
 visible = false
 offset_left = 318.0
 offset_top = 493.0
@@ -107,7 +107,7 @@ offset_bottom = 593.0
 theme_override_font_sizes/font_size = 36
 theme_override_styles/hover = SubResource("StyleBoxFlat_e03ss")
 theme_override_styles/normal = SubResource("StyleBoxFlat_e03ss")
-text = "Reset Puzzle"
+text = "Exit (resets)"
 
 [node name="Slide4" type="Area2D" parent="."]
 position = Vector2(960, 540)
@@ -379,7 +379,7 @@ texture = ExtResource("54_2541q")
 [connection signal="completed" from="SlidingPuzzle1Main" to="." method="on_completed"]
 [connection signal="completed" from="SlidingPuzzle2Main" to="." method="on_completed"]
 [connection signal="completed" from="SlidingPuzzle3Main" to="." method="on_completed"]
-[connection signal="button_up" from="Reset" to="." method="reset_puzzle"]
+[connection signal="button_up" from="Exit" to="." method="reset_puzzle"]
 [connection signal="completed" from="Slide4" to="." method="on_completed"]
 [connection signal="completed" from="Slide5" to="." method="on_completed"]
 [connection signal="completed" from="Slide6" to="." method="on_completed"]

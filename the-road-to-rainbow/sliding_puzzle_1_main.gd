@@ -41,6 +41,7 @@ func shuffle_tiles():
 		if tiles[tile] != $Tile16 and tile != previous and tile != previous_1:
 			var rows = int((tiles[tile].position.y + 483) / ogW)
 			var cols = int((tiles[tile].position.x + 492) / ogW)
+			print(tiles[tile].position)
 			check_neighbours(rows,cols)
 			previous_1 = previous
 			previous = tile
@@ -65,6 +66,7 @@ func _process(_delta):
 			playing = false
 
 func check_neighbours(rows, cols):
+	print("ran check neighbors")
 	var empty = false
 	var done = false
 	var pos = rows * 4 + cols

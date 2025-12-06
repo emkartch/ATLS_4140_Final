@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ds8aae77ps3fc"]
+[gd_scene load_steps=30 format=3 uid="uid://ds8aae77ps3fc"]
 
 [ext_resource type="Script" uid="uid://bw3olh0ub4d0c" path="res://hud.gd" id="1_64ctp"]
 [ext_resource type="FontFile" uid="uid://b5bspum6ffekd" path="res://fonts/SourceCodePro-Bold.ttf" id="2_8sq4i"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://b63y4slt4n8t1" path="res://cutscenes/Close1.png" id="12_w71nf"]
 [ext_resource type="Texture2D" uid="uid://bd0n2nlvctjvy" path="res://cutscenes/Close2.png" id="13_615i1"]
 [ext_resource type="AudioStream" uid="uid://pijdr3p8grq" path="res://sounds/Moonshadow.mp3" id="14_2d608"]
+[ext_resource type="Texture2D" uid="uid://cl0ks8w4yn4tp" path="res://images/Instructions.png" id="14_w71nf"]
 [ext_resource type="AudioStream" uid="uid://dogvyxyddh7ul" path="res://sounds/Eldertide.mp3" id="15_2d608"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sq4i"]
@@ -334,7 +335,6 @@ wait_time = 2.0
 
 [node name="Cards" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 
 [node name="Open1" type="TextureRect" parent="Cards"]
 offset_right = 1920.0
@@ -372,8 +372,22 @@ offset_bottom = 1080.0
 texture = ExtResource("13_615i1")
 stretch_mode = 4
 
+[node name="Instructions" type="TextureRect" parent="Cards"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("14_w71nf")
+stretch_mode = 4
+
 [node name="Timer" type="Timer" parent="Cards"]
-wait_time = 10.0
+wait_time = 0.2
+
+[node name="Next" type="Button" parent="Cards"]
+offset_left = 1591.0
+offset_top = 961.0
+offset_right = 1883.0
+offset_bottom = 1045.0
+theme_override_font_sizes/font_size = 48
+text = "Next"
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_2d608")
@@ -388,3 +402,4 @@ stream = ExtResource("15_2d608")
 [connection signal="pressed" from="Settings/ReturnIcon" to="." method="_on_return_icon_pressed"]
 [connection signal="toggled" from="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="toggled" from="Settings/Control/VBoxContainer/PanelContainer/VBoxContainer/EasyCheck" to="." method="set_puzzle_difficulty"]
+[connection signal="button_up" from="Cards/Next" to="." method="next_opening_card"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dti27yei47ah5"]
+[gd_scene load_steps=15 format=3 uid="uid://dti27yei47ah5"]
 
 [ext_resource type="Script" uid="uid://0s41has1f1ju" path="res://player_controller.gd" id="1_o6g0v"]
 [ext_resource type="SpriteFrames" uid="uid://cus5nvn1axpe2" path="res://player/sprites/basic_sprites.tres" id="2_1jxqw"]
@@ -12,9 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://dlyw30mu7akju" path="res://sounds/hurt.wav" id="10_n7ghd"]
 [ext_resource type="AudioStream" uid="uid://cr7icv1fcnit6" path="res://sounds/death.wav" id="11_nvl01"]
 [ext_resource type="AudioStream" uid="uid://x0v7f1scas36" path="res://sounds/punch.wav" id="12_ivps1"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8u7"]
-size = Vector2(23.75, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jxqw"]
 size = Vector2(24.75, 14)
@@ -32,9 +29,9 @@ script = ExtResource("1_o6g0v")
 sprite_frames = ExtResource("2_1jxqw")
 animation = &"attack_down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-0.75, 7.5)
-shape = SubResource("RectangleShape2D_ob8u7")
+polygon = PackedVector2Array(-7.25, 6.75, 7, 6.75, 10.75, 2.5, 10.75, -1.5, 10.75, -5.75, -11.25, -5.5, -11.25, 2.25)
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(0.5, 7.75)

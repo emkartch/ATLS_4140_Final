@@ -75,16 +75,19 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 		Global.player_speed = 0
 		#Global.direction_animation_update("stagger")
 		if !health < 0:
+			$hurt.play()
 			healthBar.value = health
 			healthBarText.text = str(int(health)) + "/" + str(int(Global.max_player_health))
 		if health <= 0.0:
 			#hide() # Player disappears after being hit.
+			$death.play()
 			health_depleted.emit()
 
 
 func _on_punch_area_body_entered(body: Node2D) -> void:
 	if body != self and body.has_method("mob_take_damage"):
 		body.mob_take_damage()
+		$punch.play()
 		
 func change_color():
 	$AnimatedSprite2D.sprite_frames = sprite_array[Global.game_lvl - 1]

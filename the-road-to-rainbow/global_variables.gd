@@ -18,7 +18,7 @@ var max_player_health = 100
 
 var player_death = false
 
-var opening_cutscene = true
+var opening_cutscene = false
 
 var puzzle_running = false
 

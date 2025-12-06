@@ -9,13 +9,18 @@ signal start_game
 @onready var player = get_node("/root/Main/Player")
 @onready var animatedSprite = get_node("/root/Main/Player/AnimatedSprite2D")
 
+var open_cards = []
+var card_i = 0
+
 func _ready():
 	$InLevel.hide()
 	$Settings.hide()
 	tileMap.hide()
 	player.hide()
 	$Alerts.hide()
+	$Cards.hide()
 	
+	open_cards = [$Cards/Open1, $Cards/Open2, $Cards/Open3, $Cards/Open4, $Cards/Instructions]
 #func level_remove():
 	#tileMap.queue_free()
 	
@@ -150,29 +155,40 @@ func run_opening_cards():
 	$Cards/Open4.hide()
 	$Cards/Close1.hide()
 	$Cards/Close2.hide()
+	$Cards/Instructions.hide()
 	
 	$Cards.show()
 	
-	$Cards/Timer.start()
-	await $Cards/Timer.timeout
-	$Cards/Open2.show()
-	$Cards/Open1.hide()
+	#await $Next.pressed()
+	#$Cards/Timer.start()
+	#$Cards/Open2.show()
+	#$Cards/Open1.hide()
+	#
+	#await $Cards/Timer.timeout
+	#await $Next.pressed()
+	#$Cards/Timer.start()
+	#await $Cards/Timer.timeout
+	#$Cards/Open3.show()
+	#$Cards/Open2.hide()
+	#
+	#await $Cards/Timer.timeout
+	#await $Next.pressed()
+	#$Cards/Timer.start()
+	#await $Cards/Timer.timeout
+	#$Cards/Open4.show()
+	#$Cards/Open3.hide()
+	#
+	#await $Cards/Timer.timeout
+	#await $Next.pressed()
+	#
+	#$Cards/Instructions.show()
+	#$Cards/Open4.hide()
+	#$Cards/Timer.start()
+	#await $Cards/Timer.timeout
 	
-	$Cards/Timer.start()
-	await $Cards/Timer.timeout
-	$Cards/Open3.show()
-	$Cards/Open2.hide()
-	
-	$Cards/Timer.start()
-	await $Cards/Timer.timeout
-	$Cards/Open4.show()
-	$Cards/Open3.hide()
-	
-	$Cards/Timer.start()
-	await $Cards/Timer.timeout
-	$Cards.hide()
-	Global.opening_cutscene = true
-	start_game.emit()
+	#$Cards.hide()
+	#Global.opening_cutscene = true
+	#start_game.emit()
 	
 func run_end_cards():
 	$BackgroundMusic.stop()
@@ -197,3 +213,13 @@ func set_puzzle_difficulty(toggled_on: bool) -> void:
 		Global.puzzle_difficulty = 25
 	elif not toggled_on:
 		Global.puzzle_difficulty = 50
+
+func next_opening_card():
+	card_i += 1
+	if card_i < 5:
+		open_cards[card_i].show()
+		open_cards[card_i - 1].hide()
+	else:
+		$Cards.hide()
+		Global.opening_cutscene = true
+		start_game.emit()
