@@ -107,7 +107,6 @@ func check_for_puzzle_click(sprite_pos):
 			#print("activate puzzle")
 			if tile_map_coords not in completed_puzzles:
 				activate_puzzle.emit(tile_map_coords, tileset_coords)
-				completed_puzzles.append(tile_map_coords)
 			else:
 				if Global.puzzle_running == false:
 					hud_alert.emit("Puzzle already completed")

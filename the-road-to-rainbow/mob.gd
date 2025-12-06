@@ -49,7 +49,7 @@ func _physics_process(_delta: float) -> void:
 func mob_take_damage():
 	health -= 1
 	knockbackBool = true
-	if health == 0:
+	if health <= 0:
 		$AnimatedSprite2D.play("death")
 
 func change_color():

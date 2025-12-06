@@ -23,3 +23,5 @@ var opening_cutscene = false
 var puzzle_running = false
 
 var puzzle_difficulty = 50
+
+var time_out_for_puzz = 1.0

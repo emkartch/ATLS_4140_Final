@@ -8,6 +8,8 @@ extends Node2D
 @onready var healthBarText = get_node("/root/Main/HUD/InLevel/HealthBar/HealthLabel")
 @onready var rain_icon = get_node("/root/Main/HUD/InLevel/RainbowIcon")
 
+var tile_map_coords
+
 var tile_cell_size_start = Vector2(144,144)
 var tile_cell_size = Vector2(128,128)
 
@@ -53,6 +55,8 @@ func _unhandled_input(event):
 func activate_puzzle(tile_coords, tileset_coords):
 	#print("Activated puzzle!", tile_coords, tileset_coords)
 	if Global.main_game_running:
+		tile_map_coords = tile_coords
+		
 		if Global.puzzle_running == false:
 			$Puzzles.start_puzzle()
 			Global.puzzle_running = true
@@ -60,6 +64,8 @@ func activate_puzzle(tile_coords, tileset_coords):
 func complete_puzzle():
 	Global.puzzle_running = false
 	$allTiles.num_finished += 1 # This should only happen AFTER puzzle is completed
+	$allTiles.completed_puzzles.append(tile_map_coords)
+	
 	if $allTiles.num_finished < 5:
 		$HUD.hud_alert("Puzzles completed: " + str($allTiles.num_finished) + "/5")
 	else:
@@ -96,6 +102,7 @@ func next_level():
 	if Global.game_lvl < 7:
 		Global.game_lvl += 1
 		$Player.reset_health()
+		$allTiles.completed_puzzles = []
 	else:
 		end_game_cutscene()
 	

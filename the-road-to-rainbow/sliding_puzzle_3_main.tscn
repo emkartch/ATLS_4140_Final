@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c17r2wxq80epd"]
+[gd_scene load_steps=20 format=3 uid="uid://c17r2wxq80epd"]
 
 [ext_resource type="Script" uid="uid://lhdlgcx632c6" path="res://sliding_puzzle_3_main.gd" id="1_34fro"]
 [ext_resource type="Texture2D" uid="uid://b7g8051v6h7kc" path="res://images/Puzzle3_01.jpg" id="2_s5ei2"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b4jymu5ya4yq4" path="res://images/Puzzle3_14.jpg" id="15_p8vm4"]
 [ext_resource type="Texture2D" uid="uid://btu4vhc57btqt" path="res://images/Puzzle3_15.jpg" id="16_8w4sy"]
 [ext_resource type="Texture2D" uid="uid://cyqdebg3vx6w5" path="res://images/Puzzle3Grey.jpg" id="17_uunhj"]
+[ext_resource type="Texture2D" uid="uid://ckb7bnvm6eltr" path="res://images/Puzzle3.png" id="18_s5ei2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yfcyt"]
 size = Vector2(984, 984)
@@ -106,3 +107,26 @@ texture = ExtResource("16_8w4sy")
 position = Vector2(369, 378)
 scale = Vector2(0.41, 0.41)
 texture = ExtResource("17_uunhj")
+
+[node name="Completed" type="TextureRect" parent="."]
+offset_left = 542.857
+offset_top = -482.857
+offset_right = 2942.86
+offset_bottom = 1917.14
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("18_s5ei2")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 539.0
+offset_top = -76.0
+offset_right = 949.0
+offset_bottom = 496.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "Completed puzzle
+
+[b]How to solve:[/b]
+Click any tile adjacent to the grey tile to swap it with the grey one. Complete the image by swapping tiles.
+[b]The grey tile will always end in the bottom right.[/b]"

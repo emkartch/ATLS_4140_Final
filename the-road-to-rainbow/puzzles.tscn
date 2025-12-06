@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://b1ox71ir72lm"]
+[gd_scene load_steps=60 format=3 uid="uid://b1ox71ir72lm"]
 
 [ext_resource type="Script" uid="uid://cwb7ioa8h08n2" path="res://puzzles.gd" id="1_aahxs"]
 [ext_resource type="PackedScene" uid="uid://btb8twisisaqb" path="res://sliding_puzzle_1_main.tscn" id="1_fa1cb"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dy6sb3puq7sfw" path="res://images/puzzle4slides_15.jpg" id="21_ik8ky"]
 [ext_resource type="Texture2D" uid="uid://cfk4yd38nopr5" path="res://images/Puzzle4Gray.jpg" id="22_556vm"]
 [ext_resource type="Texture2D" uid="uid://cgmwvuxwhh3ux" path="res://images/Puzzle5Slices_01.jpg" id="23_556vm"]
+[ext_resource type="Texture2D" uid="uid://bdxs7hmgd53yj" path="res://images/puzzle4.jpg" id="23_p805h"]
 [ext_resource type="Texture2D" uid="uid://cdylgdh0ehcts" path="res://images/Puzzle5Slices_02.jpg" id="24_tvsnl"]
 [ext_resource type="Texture2D" uid="uid://dhfok0ejko7i0" path="res://images/Puzzle5Slices_03.jpg" id="25_i5kw6"]
 [ext_resource type="Texture2D" uid="uid://dfu437bhgeh6k" path="res://images/Puzzle5Slices_04.jpg" id="26_ud2kk"]
@@ -39,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://clai6okkafvcb" path="res://images/Puzzle5Slices_15.jpg" id="37_34dm5"]
 [ext_resource type="Texture2D" uid="uid://b6rtnlsqyclb0" path="res://images/Puzzle5Gray.jpg" id="38_b1gj3"]
 [ext_resource type="Texture2D" uid="uid://dwxxqwb7kgj2x" path="res://images/Puzzle6Slices_01.jpg" id="39_gfwau"]
+[ext_resource type="Texture2D" uid="uid://c6wod2smqq8r0" path="res://images/Puzzle5.jpg" id="40_btcjt"]
 [ext_resource type="Texture2D" uid="uid://crbw5ef0ekmv0" path="res://images/Puzzle6Slices_02.jpg" id="40_p805h"]
 [ext_resource type="Texture2D" uid="uid://dgoumk22h61wq" path="res://images/Puzzle6Slices_03.jpg" id="41_btcjt"]
 [ext_resource type="Texture2D" uid="uid://dbggdg4m5772k" path="res://images/Puzzle6Slices_04.jpg" id="42_4oi5f"]
@@ -54,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://ciqrikyqsufeh" path="res://images/Puzzle6Slices_14.jpg" id="52_3bpai"]
 [ext_resource type="Texture2D" uid="uid://bawtkv86b4nra" path="res://images/Puzzle6Slices_15.jpg" id="53_bbw73"]
 [ext_resource type="Texture2D" uid="uid://bwjk1p3x8knet" path="res://images/Puzzle6Gray.jpg" id="54_2541q"]
+[ext_resource type="Texture2D" uid="uid://d32wxscbq8456" path="res://images/Puzzle6.jpg" id="57_4oi5f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e03ss"]
 bg_color = Color(0.138445, 0.19376, 0.215339, 1)
@@ -108,6 +111,17 @@ theme_override_font_sizes/font_size = 36
 theme_override_styles/hover = SubResource("StyleBoxFlat_e03ss")
 theme_override_styles/normal = SubResource("StyleBoxFlat_e03ss")
 text = "Exit (resets)"
+
+[node name="GiveUp" type="Button" parent="."]
+visible = false
+offset_left = 318.0
+offset_top = 493.0
+offset_right = 594.0
+offset_bottom = 593.0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = SubResource("StyleBoxFlat_e03ss")
+theme_override_styles/normal = SubResource("StyleBoxFlat_e03ss")
+text = "Give Up"
 
 [node name="Slide4" type="Area2D" parent="."]
 position = Vector2(960, 540)
@@ -198,6 +212,29 @@ position = Vector2(369, 378)
 scale = Vector2(0.41, 0.41)
 texture = ExtResource("22_556vm")
 
+[node name="Completed" type="TextureRect" parent="Slide4"]
+offset_left = 542.857
+offset_top = -482.857
+offset_right = 2942.86
+offset_bottom = 1917.14
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("23_p805h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Slide4"]
+offset_left = 539.0
+offset_top = -76.0
+offset_right = 949.0
+offset_bottom = 496.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "Completed puzzle
+
+[b]How to solve:[/b]
+Click any tile adjacent to the grey tile to swap it with the grey one. Complete the image by swapping tiles.
+[b]The grey tile will always end in the bottom right.[/b]"
+
 [node name="Slide5" type="Area2D" parent="."]
 position = Vector2(960, 540)
 scale = Vector2(0.7, 0.7)
@@ -286,6 +323,29 @@ texture = ExtResource("37_34dm5")
 position = Vector2(369, 378)
 scale = Vector2(0.41, 0.41)
 texture = ExtResource("38_b1gj3")
+
+[node name="Completed" type="TextureRect" parent="Slide5"]
+offset_left = 542.857
+offset_top = -482.857
+offset_right = 2942.86
+offset_bottom = 1917.14
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("40_btcjt")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Slide5"]
+offset_left = 539.0
+offset_top = -76.0
+offset_right = 949.0
+offset_bottom = 496.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "Completed puzzle
+
+[b]How to solve:[/b]
+Click any tile adjacent to the grey tile to swap it with the grey one. Complete the image by swapping tiles.
+[b]The grey tile will always end in the bottom right.[/b]"
 
 [node name="Slide6" type="Area2D" parent="."]
 position = Vector2(960, 540)
@@ -376,10 +436,34 @@ position = Vector2(369, 378)
 scale = Vector2(0.41, 0.41)
 texture = ExtResource("54_2541q")
 
+[node name="Completed" type="TextureRect" parent="Slide6"]
+offset_left = 542.857
+offset_top = -482.857
+offset_right = 2942.86
+offset_bottom = 1917.14
+scale = Vector2(0.17, 0.17)
+texture = ExtResource("57_4oi5f")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Slide6"]
+offset_left = 539.0
+offset_top = -76.0
+offset_right = 949.0
+offset_bottom = 496.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "Completed puzzle
+
+[b]How to solve:[/b]
+Click any tile adjacent to the grey tile to swap it with the grey one. Complete the image by swapping tiles.
+[b]The grey tile will always end in the bottom right.[/b]"
+
 [connection signal="completed" from="SlidingPuzzle1Main" to="." method="on_completed"]
 [connection signal="completed" from="SlidingPuzzle2Main" to="." method="on_completed"]
 [connection signal="completed" from="SlidingPuzzle3Main" to="." method="on_completed"]
 [connection signal="button_up" from="Exit" to="." method="reset_puzzle"]
+[connection signal="button_up" from="GiveUp" to="." method="give_up"]
 [connection signal="completed" from="Slide4" to="." method="on_completed"]
 [connection signal="completed" from="Slide5" to="." method="on_completed"]
 [connection signal="completed" from="Slide6" to="." method="on_completed"]
